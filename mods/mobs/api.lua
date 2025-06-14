@@ -18,7 +18,6 @@ function mobs.is_creative(name)
 			{creative = true})
 end
 
-
 -- localize math functions
 local pi = math.pi
 local square = math.sqrt
@@ -96,8 +95,10 @@ local mob_class = {
 	collisionbox = {-0.25, -0.25, -0.25, 0.25, 0.25, 0.25},
 	visual_size = {x = 1, y = 1},
 	texture_mods = "",
+	dogshoot_stop = true,
 	makes_footstep_sound = false,
-	view_range = 5,
+	view_range = 15,
+	_acceleration = 1,
 	walk_velocity = 1,
 	run_velocity = 2,
 	light_damage = 0,
@@ -292,7 +293,7 @@ function mob_class:set_velocity(v)
 		z = (cos(yaw) * v) + c_y
 	}
 
-	self.object:set_velocity(new_vel)
+	self._target_velocity = new_vel
 end
 
 -- global version of above function
@@ -2371,8 +2372,9 @@ function mob_class:do_states(dtime)
 		local p = self.attack:get_pos() or s
 		local dist = get_distance(p, s)
 
-		-- stop attacking if player invisible or out of range
-		if dist > self.view_range
+		-- stop attacking if player invisible or out of attention range (3 times view range.)
+		-- attention range is more than veiw range so that being seen my a monster is more punishing
+		if dist > self.view_range*3
 		or not self.attack
 		or not self.attack:get_pos()
 		or self.attack:get_hp() <= 0
@@ -2433,6 +2435,8 @@ function mob_class:do_states(dtime)
 			-- walk right up to player unless the timer is active
 			if self.v_start and (self.stop_to_explode or dist < 1.5) then
 				self:set_velocity(0)
+			elseif self:flight_check() then
+				self:set_velocity(self.fly_velocity or self.run_velocity*2)
 			else
 				self:set_velocity(self.run_velocity)
 			end
@@ -2517,6 +2521,7 @@ function mob_class:do_states(dtime)
 				local p2 = p
 				local p_y = floor(p2.y + 1)
 				local v = self.object:get_velocity()
+				local d = vector.direction(s,p)
 
 				if self:flight_check() then
 
@@ -2524,7 +2529,7 @@ function mob_class:do_states(dtime)
 
 						self.object:set_velocity({
 							x = v.x,
-							y = 1 * self.walk_velocity,
+							y = 2 * self.run_velocity*d.y,
 							z = v.z
 						})
 
@@ -2532,7 +2537,7 @@ function mob_class:do_states(dtime)
 
 						self.object:set_velocity({
 							x = v.x,
-							y = -1 * self.walk_velocity,
+							y = 2 * self.run_velocity*d.y,
 							z = v.z
 						})
 					end
@@ -2605,6 +2610,8 @@ function mob_class:do_states(dtime)
 
 					if self.path.stuck then
 						self:set_velocity(self.walk_velocity)
+					elseif self:flight_check() then
+						self:set_velocity(self.fly_velocity or self.run_velocity*2)
 					else
 						self:set_velocity(self.run_velocity)
 					end
@@ -2704,7 +2711,11 @@ function mob_class:do_states(dtime)
 
 			yaw = yaw_to_pos(self, p)
 
-			self:set_velocity(0)
+			if self.dogshoot_stop then
+				self:set_velocity(0)
+			else
+				self:set_velocity(self.run_velocity)
+			end
 
 
 
@@ -3619,10 +3630,39 @@ function mob_class:on_step(dtime, moveresult)
 	end
 
 	-- smooth rotation by ThomasMonroe314
+	if self._target_velocity then
+		local norm = vector.normalize(self._target_velocity)
+
+		self.object:add_velocity(vector.multiply(self._target_velocity, self._acceleration*0.1))
+		local v = self.object:get_velocity()
+
+		local ls = vector.length(v) -- speed
+		local lt = vector.length(self._target_velocity) -- potential speed
+		local mod = 0.95 -- default deceleration
+		if ls>lt+10 and not self:flight_check() then
+			mod = 0.8
+		elseif self:flight_check() then
+			mod = 0.98
+		end
+		local ymod = 1
+		if v.y > 0 then -- only apply y drag on upward vectors
+			ymod = mod / 1.2
+		end
+
+		self.object:set_velocity(vector.multiply(v, vector.new(mod,ymod,mod)))
+	end
 	if self.target_yaw then
 		local y = self.object:get_yaw()
 
-		self.object:set_yaw(lerp(y, self.target_yaw, 0.1))
+		local turnspeed = 7
+		if self:flight_check() then
+			turnspeed = 3
+		end
+
+
+		self.object:set_yaw(lerp(y, self.target_yaw, turnspeed*math.min(dtime, 1)))
+		local r = self.object:get_rotation()
+		self.object:set_rotation(vector.new(r.x, r.y, r.y-self.target_yaw))
 	end
 
 
