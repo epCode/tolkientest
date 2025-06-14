@@ -1,0 +1,237 @@
+License of source code
+----------------------
+
+GNU Lesser General Public License, version 2.1
+Copyright (C) 2011-2016 celeron55, Perttu Ahola <celeron55@gmail.com>
+Copyright (C) 2011-2016 Various Minetest developers and contributors
+
+This program is free software; you can redistribute it and/or modify it under the terms
+of the GNU Lesser General Public License as published by the Free Software Foundation;
+either version 2.1 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU Lesser General Public License for more details:
+https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+
+
+Licenses of media (textures, models and sounds)
+-----------------------------------------------
+
+Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+Copyright (C) 2010-2016:
+  celeron55, Perttu Ahola <celeron55@gmail.com>
+  Cisoun
+  G4JC
+  VanessaE
+  RealBadAngel
+  Calinou
+  MirceaKitsune
+  Jordach
+  PilzAdam
+  jojoa1997
+  InfinityProject
+  Splizard
+  Zeg9
+  paramat
+  BlockMen
+  sofar
+  Neuromancer
+  Gambit
+  asl97
+  KevDoy
+  Mito551
+  GreenXenith
+  kaeza
+  kilbith
+
+You are free to:
+Share — copy and redistribute the material in any medium or format.
+Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+Attribution — You must give appropriate credit, provide a link to the license, and
+indicate if changes were made. You may do so in any reasonable manner, but not in any way
+that suggests the licensor endorses you or your use.
+
+ShareAlike — If you remix, transform, or build upon the material, you must distribute
+your contributions under the same license as the original.
+
+No additional restrictions — You may not apply legal terms or technological measures that
+legally restrict others from doing anything the license permits.
+
+Notices:
+
+You do not have to comply with the license for elements of the material in the public
+domain or where your use is permitted by an applicable exception or limitation.
+No warranties are given. The license may not give you all of the permissions necessary
+for your intended use. For example, other rights such as publicity, privacy, or moral
+rights may limit how you use the material.
+
+For more details:
+http://creativecommons.org/licenses/by-sa/3.0/
+
+-----------------------
+
+Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+Copyright (C) 2017 TumeniNodes
+
+You are free to:
+Share — copy and redistribute the material in any medium or format.
+Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+Attribution — You must give appropriate credit, provide a link to the license, and
+indicate if changes were made. You may do so in any reasonable manner, but not in any way
+that suggests the licensor endorses you or your use.
+
+ShareAlike — If you remix, transform, or build upon the material, you must distribute
+your contributions under the same license as the original.
+
+No additional restrictions — You may not apply legal terms or technological measures that
+legally restrict others from doing anything the license permits.
+
+Notices:
+
+You do not have to comply with the license for elements of the material in the public
+domain or where your use is permitted by an applicable exception or limitation.
+No warranties are given. The license may not give you all of the permissions necessary
+for your intended use. For example, other rights such as publicity, privacy, or moral
+rights may limit how you use the material.
+
+For more details:
+http://creativecommons.org/licenses/by-sa/4.0/
+
+-----------------------
+
+Attribution-ShareAlike 2.0 Generic (CC BY-SA 2.0)
+Copyright (C) 2014-2016 Neuromancer
+
+
+You are free to:
+Share — copy and redistribute the material in any medium or format.
+Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+Attribution — You must give appropriate credit, provide a link to the license, and
+indicate if changes were made. You may do so in any reasonable manner, but not in any way
+that suggests the licensor endorses you or your use.
+
+ShareAlike — If you remix, transform, or build upon the material, you must distribute
+your contributions under the same license as the original.
+
+No additional restrictions — You may not apply legal terms or technological measures that
+legally restrict others from doing anything the license permits.
+
+Notices:
+
+You do not have to comply with the license for elements of the material in the public
+domain or where your use is permitted by an applicable exception or limitation.
+No warranties are given. The license may not give you all of the permissions necessary
+for your intended use. For example, other rights such as publicity, privacy, or moral
+rights may limit how you use the material.
+
+For more details:
+http://creativecommons.org/licenses/by-sa/2.0/
+
+-----------------------
+
+Attribution 3.0 Unported (CC BY 3.0)
+Copyright (C) 2009 cmusounddesign
+Copyright (C) 2010 Tomlija
+Copyright (C) 2010 lsprice
+Copyright (C) 2014 sonictechtonic
+Copyright (C) 2015 yadronoff
+Copyright (C) 2007 HerbertBoland
+Copyright (C) 2006 AGFX
+Copyright (C) 2014 Motion_S: Samples are taken from file: http://freesound.org/people/Motion_S/sounds/221764/
+Copyright (C) 2015 n_audioman: Samples are taken from file: http://freesound.org/people/n_audioman/sounds/321841/
+
+You are free to:
+Share — copy and redistribute the material in any medium or format.
+Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+Attribution — You must give appropriate credit, provide a link to the license, and
+indicate if changes were made. You may do so in any reasonable manner, but not in any way
+that suggests the licensor endorses you or your use.
+
+No additional restrictions — You may not apply legal terms or technological measures that
+legally restrict others from doing anything the license permits.
+
+Notices:
+
+You do not have to comply with the license for elements of the material in the public
+domain or where your use is permitted by an applicable exception or limitation.
+No warranties are given. The license may not give you all of the permissions necessary
+for your intended use. For example, other rights such as publicity, privacy, or moral
+rights may limit how you use the material.
+
+For more details:
+http://creativecommons.org/licenses/by/3.0/
+
+-----------------------
+
+CC0 1.0 Universal (CC0 1.0)
+TumeniNodes (CC0 1.0)
+default_explode.ogg
+renamed, edited, and converted to .ogg from Explosion2.wav
+by steveygos93 (CC0 1.0)
+<https://freesound.org/s/80401/>
+
+Samples are taken from file: http://freesound.org/people/kiefspoon/sounds/144551/
+default_dirt_footstep.1.ogg
+default_dirt_footstep.2.ogg
+default_dirt_footstep.3.ogg
+default_dirt_footstep.4.ogg
+default_dirt_footstep.5.ogg
+
+Samples are taken from file: http://freesound.org/people/karlis.stigis/sounds/168712/
+default_glass_footstep.1.ogg
+default_glass_footstep.2.ogg
+default_glass_footstep.3.ogg
+default_glass_footstep.4.ogg
+default_glass_footstep.5.ogg
+
+Samples are taken from file: http://freesound.org/people/Yuval/sounds/206030/
+default_grass_footstep.1.ogg
+default_grass_footstep.2.ogg
+default_grass_footstep.3.ogg
+default_grass_footstep.4.ogg
+default_grass_footstep.5.ogg
+
+Samples are taken from file: http://freesound.org/people/squashy555/sounds/244248/
+default_gravel_footstep.1.ogg
+default_gravel_footstep.2.ogg
+default_gravel_footstep.3.ogg
+default_gravel_footstep.4.ogg
+default_gravel_footstep.5.ogg
+
+Samples are taken from file: http://freesound.org/people/Phil25/sounds/208101/
+default_metal_footstep.1.ogg
+default_metal_footstep.2.ogg
+default_metal_footstep.3.ogg
+default_metal_footstep.4.ogg
+default_metal_footstep.5.ogg
+
+Samples are taken from file: http://freesound.org/people/Ryding/sounds/94337/
+default_snow_footstep.1.ogg
+default_snow_footstep.2.ogg
+default_snow_footstep.3.ogg
+default_snow_footstep.4.ogg
+default_snow_footstep.5.ogg
+
+Samples are taken from file: http://freesound.org/people/taure/sounds/362777/
+default_wood_footstep.1.ogg
+default_wood_footstep.2.ogg
+default_wood_footstep.3.ogg
+default_wood_footstep.4.ogg
+default_wood_footstep.5.ogg

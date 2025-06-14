@@ -1,0 +1,8 @@
+return "return {[\"page\"] = 1, [\"title\"] = \"On Palantiri\", " ..
+	"[\"page_max\"] = 3, [\"text_len\"] = 1300, [\"owner\"] = \"A Wise Sage\", " ..
+	"[\"text\"] = \"The Palantir is a wonderful device, allowing those who use it to travel vast distances in the blink of an eye. But the palantir cannot simply be used. Indeed, an object of this power requires some of the most costly materials known to the world in order to hold it in place.\\\n\\\n" ..
+	"So that it can anchor itself to the world the planatiri must have, no further than two spaces from it, six tilkal and 16 mithril blocks.\\\n\\\n" ..
+	"After the palantir has been anchored firmly to the world, it needs to be configured before it can be used. The palantir needs a network and a name. The palantir will not allow you to proceed if the name you try to give it is the same as another palantir, or if the network belongs to someone else. Right click on the palantir to configure these two things.\\\n\\\n" ..
+	"Next the palantir will allow you to chose which races may use its network. You will be able to change your preferences as to which races are allowed to use the network whenever you add a new palantir to the network. If you want nobody except for yourself to be able to use the network, then deselect all races.\\\n\\\n" ..
+	"After this, the palantir is ready to be used. Select another palantir on the network to teleport to, and away you go! If somebody from a forbidden race tries to use it, there will be unpleasant consequences!\\\n\\\n" ..
+	"After adding another palantir to the network, to be able to teleport to it from other palantiri, you will need to punch any other palantiri on the network in order to update the list of palantiri avalible to teleport to.\\\n\"}"
