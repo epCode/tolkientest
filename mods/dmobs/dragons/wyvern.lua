@@ -36,10 +36,10 @@ mobs:register_mob("dmobs:wyvern", {
    jump = true,
    fly = true,
    drops = {
-      {name = "dmobs:dragon_egg_poison", chance = 100, min = 1, max = 1},
-	  {name = "dmobs:dragon_egg_lightning", chance = 100, min = 1, max = 1},
-	  {name = "dmobs:dragon_egg_fire", chance = 100, min = 1, max = 1},
-	  {name = "dmobs:dragon_egg_ice", chance = 100, min = 1, max = 1},
+      {name = "dmobs:dragon_egg_poison", chance = 49, min = 1, max = 1},
+	  {name = "dmobs:dragon_egg_lightning", chance = 49, min = 1, max = 1},
+	  {name = "dmobs:dragon_egg_fire", chance = 49, min = 1, max = 1},
+	  {name = "dmobs:dragon_egg_ice", chance = 49, min = 1, max = 1},
    },
    sounds = {
 	  shoot_attack = "mobs_fireball",

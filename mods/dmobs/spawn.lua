@@ -47,6 +47,6 @@ if dmobs.dragons then
 	--mobs:register_spawn("dmobs:dragon3", {"","default:snowblock"}, 20, 10, 64000, 2, 31000)
 	--mobs:register_spawn("dmobs:dragon4", {"lottplants:mirkleaf"}, 20, 10, 64000, 2, 31000)
 	--mobs:register_spawn("dmobs:waterdragon", {"default:water_source", "default:water_flowing"}, 20, 10, 32000, 1, 31000, false)
-	mobs:register_spawn("dmobs:wyvern",	{"lottmapgen:mordor_stone","lottmapgen:angsnowblock"}, 20, -1, 40000, 4, 31000)
+	mobs:register_spawn("dmobs:wyvern",	{"lottmapgen:mordor_stone","lottmapgen:angsnowblock"}, 20, -1, 100000, 4, 31000)
 	--mobs:register_spawn("dmobs:dragon_great", {"default:lava_source", "default:lava_flowing"}, 20, 0, 64000, -21000, 1000, false)
 end
