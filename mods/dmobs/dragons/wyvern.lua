@@ -31,7 +31,7 @@ mobs:register_mob("dmobs:wyvern", {
    walk_velocity = 3,
    _acceleration = 0.2,
    run_velocity = 5,
-   fly_velocity = 35,
+   fly_velocity = 40,
    fall_speed = -2,
    jump = true,
    fly = true,

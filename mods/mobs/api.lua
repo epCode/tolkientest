@@ -3666,7 +3666,7 @@ function mob_class:on_step(dtime, moveresult)
 		local r = self.object:get_rotation()
 		local roll = 0
 		if self:flight_check() then
-			local roll = r.y-self.target_yaw
+			roll = r.y-self.target_yaw
 		end
 
 		self.object:set_rotation(vector.new(r.x, r.y, roll))
