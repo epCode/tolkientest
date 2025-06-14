@@ -3635,12 +3635,12 @@ function mob_class:on_step(dtime, moveresult)
 	if self._target_velocity then
 		local norm = vector.normalize(self._target_velocity)
 
-		self.object:add_velocity(vector.multiply(self._target_velocity, self._acceleration*0.05))
+		self.object:add_velocity(vector.multiply(self._target_velocity, self._acceleration*0.12))
 		local v = self.object:get_velocity()
 
 		local ls = vector.length(v) -- speed
 		local lt = vector.length(self._target_velocity) -- potential speed
-		local mod = 0.95 -- default deceleration
+		local mod = 0.9 -- default deceleration
 		if ls>lt+10 and not self:flight_check() then
 			mod = 0.8
 		elseif self:flight_check() then
