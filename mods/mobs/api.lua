@@ -663,6 +663,8 @@ end
 -- are we flying in what we are suppose to? (taikedz)
 function mob_class:flight_check()
 
+	if not self.fly then return end
+
 	local def = minetest.registered_nodes[self.standing_in]
 
 	if not def then return false end
@@ -3633,7 +3635,7 @@ function mob_class:on_step(dtime, moveresult)
 	if self._target_velocity then
 		local norm = vector.normalize(self._target_velocity)
 
-		self.object:add_velocity(vector.multiply(self._target_velocity, self._acceleration*0.1))
+		self.object:add_velocity(vector.multiply(self._target_velocity, self._acceleration*0.05))
 		local v = self.object:get_velocity()
 
 		local ls = vector.length(v) -- speed
@@ -3659,10 +3661,15 @@ function mob_class:on_step(dtime, moveresult)
 			turnspeed = 3
 		end
 
-
 		self.object:set_yaw(lerp(y, self.target_yaw, turnspeed*math.min(dtime, 1)))
+
 		local r = self.object:get_rotation()
-		self.object:set_rotation(vector.new(r.x, r.y, r.y-self.target_yaw))
+		local roll = 0
+		if self:flight_check() then
+			local roll = r.y-self.target_yaw
+		end
+
+		self.object:set_rotation(vector.new(r.x, r.y, roll))
 	end
 
 
