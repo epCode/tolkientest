@@ -3187,10 +3187,10 @@ function mob_class:on_punch(hitter, tflp, tool_capabilities, dir, damage)
 		-- use tool knockback value or default
 		kb = tool_capabilities.damage_groups["knockback"] or kb -- (kb * 1.5)
 
-		self.object:set_velocity({
-			x = dir.x * kb,
-			y = up,
-			z = dir.z * kb
+		self.object:add_velocity({
+			x = dir.x * kb * 2,
+			y = up * 2,
+			z = dir.z * kb *2
 		})
 
 		self.pause_timer = 0.25
