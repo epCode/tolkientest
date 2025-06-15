@@ -1162,7 +1162,7 @@ mobs:register_mob("lottmobs:battle_troll", {
 
 	},
 	light_resistant = true,
-	armor = 100,
+	armor = 50,
 	drawtype = "front",
 	water_damage = 5,
 	lava_damage = 10,
