@@ -811,6 +811,18 @@ minetest.register_on_joinplayer(function(player)
 				else
 					return 1
 				end
+			elseif index == 6 then
+				if stack:get_definition().groups.armor_ring == nil then
+					return 0
+				else
+					return 1
+				end
+			elseif index == 7 then
+				if stack:get_definition().groups.armor_ring == nil then
+					return 0
+				else
+					return 1
+				end
 			end
 		end,
 		allow_take = function(inv, listname, index, stack, player)
@@ -823,8 +835,8 @@ minetest.register_on_joinplayer(function(player)
 	if inv_mod == "inventory_plus" then
 		inventory_plus.register_button(player,"armor", "Armor")
 	end
-	armor_inv:set_size("armor", 5)
-	player_inv:set_size("armor", 5)
+	armor_inv:set_size("armor", 7)
+	player_inv:set_size("armor", 7)
 	for i = 1, 5 do
 		local stack = player_inv:get_stack("armor", i)
 		armor_inv:set_stack("armor", i, stack)
