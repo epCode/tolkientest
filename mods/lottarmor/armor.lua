@@ -232,7 +232,7 @@ armor.set_player_armor = function(self, player)
 	
 	
 	
-	for i = 1, 5 do
+	for i = 1, 7 do
 		
 		local stack = player_inv:get_stack("armor", i)
 		local item = stack:get_name()
@@ -612,7 +612,7 @@ armor.update_armor = function(self, player)
 		local heal_max = 0
 		local state = 0
 		local items = 0
-		for i = 1, 5 do
+		for i = 1, 7 do
 			local stack = player_inv:get_stack("armor", i)
 			if stack:get_count() > 0 then
 				local clothes = stack:get_definition().groups["clothes"] or 0
@@ -837,7 +837,7 @@ minetest.register_on_joinplayer(function(player)
 	end
 	armor_inv:set_size("armor", 7)
 	player_inv:set_size("armor", 7)
-	for i = 1, 5 do
+	for i = 1, 7 do
 		local stack = player_inv:get_stack("armor", i)
 		armor_inv:set_stack("armor", i, stack)
 	end
