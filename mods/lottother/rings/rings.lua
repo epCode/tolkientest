@@ -70,28 +70,28 @@ minetest.register_craftitem("lottother:one_ring", {
     wear = 0,
 
     on_use = function(itemstack, user, pointed_thing)
-    	
+
     	local player = user:get_player_name()
-    	
+
     	if user:get_player_control().sneak then
 			if mana.subtract(player, 200) then
 				--local obj = placer:get_luaentity()
 				minetest.sound_play("one_ring", { object = user, max_hear_distance = 25, gain = .5 }, true)
 			end
-		
+
 		else
 			if mana.subtract(player, 200) then
-			
+
 				if playereffects.has_effect_type(player, "invisible") then
-					
+
 					playereffects.cancel_effect_group("polymorph", player)
-				
+
 				else
-			
+
 					playereffects.apply_effect_type("invisible", 3600 , user)
 					local pos = user:get_pos()
 					effect({x = pos.x, y = pos.y + 1, z = pos.z}, 80, "hyruletools_yellowstar.png", 4, 6)
-					
+
 				end
 			end
 		end
@@ -116,14 +116,14 @@ minetest.register_craftitem("lottother:vilya", {
     wear = 0,
 
     on_use = function(itemstack, user, pointed_thing)
-    	
+
     	local player = user:get_player_name()
-    	
+
     	if mana.subtract(player, 20) then
-    		
+
 		    playereffects.apply_effect_type("vilya", 60, user)
-		    
-		    
+
+
 		    local pos = user:get_pos()
 		    effect({x = pos.x, y = pos.y + 1, z = pos.z}, 80, "feather.png", 4, 6)
 		end
@@ -168,34 +168,34 @@ minetest.register_tool("lottother:nenya", {
 minetest.register_craftitem("lottother:dwarf_ring", {
 	description = minetest.colorize("darkviolet", "Dwarvern Ring of Creation and Destruction") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
-	
+
 	inventory_image = "lottother_dwarf_ring_wield.png",
 	wield_image = "mastersword_sword.png",
 	wield_scale = {x = 2, y = 2, z = 1},
-	
+
 	groups = {forbidden=1, immortal=1},
-	
+
 	tool_capabilities = {
 		full_punch_interval = .5,
 		max_drop_level=1,
 		range = 6.0, --spear is 7, warhammer is 2, dagger 3
 		wear = 0,
-		
+
 		-- Commented values are default for mithril stuff, using as reference
-		
+
 		groupcaps={
 			cracky = {times={[1]=2.0, [2]=1.0, [3]=0.40}, uses=30, maxlevel=3},
 			--cracky = {times={[1]=1.5, [2]=0.8, [3]=0.40}, uses=60, maxlevel=3},
-			
+
 			very_hard = {times={[1]=2.0, [2]=1.5, [3]=0.90}, uses=50, maxlevel=3},
 			--very_hard = {times={[1]=3.5, [2]=1.5, [3]=0.90}, uses=50, maxlevel=3},
-			
+
 			choppy={times={[1]=2.0, [2]=1.0, [3]=0.50}, uses=30, maxlevel=3},
 			--choppy={times={[1]=1.80, [2]=0.60, [3]=0.30}, uses=60, maxlevel=3},
-			
+
 			crumbly = {times={[1]=0.90, [2]=0.60, [3]=0.40}, uses=60, maxlevel=3},
 			--crumbly = {times={[1]=0.90, [2]=0.40, [3]=0.20}, uses=60, maxlevel=3},
-			
+
 			snappy={times={[1]=0.70, [2]=0.80, [3]=0.25}, uses=80, maxlevel=3},
 			--snappy={times={[1]=0.70, [2]=0.80, [3]=0.25}, uses=80, maxlevel=3},
 		},
@@ -268,27 +268,27 @@ minetest.register_craft({
 minetest.register_tool("lottother:gimli_axe", {
 	description = minetest.colorize("brown", "Gimli Axe") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
-	
+
 	inventory_image = "dwarf_warhammer.png",
 	--inventory_image = "gimli_axe.png",
 	--inventory_image = "hyruletools_tool_obaxe.png",
-	
+
 	wield_scale = {x = 1.5, y = 2, z = 1.5},
-	
+
 	tool_capabilities = {
 		full_punch_interval = 1,
-		range = 4,
+		range = 5,
 		max_drop_level=1,
 		groupcaps={
-			choppy={times={[1]=2.50, [2]=1.50, [3]=.90}, uses=2500, maxlevel=2},
-			snappy={times={[1]=2.50, [2]=1.50, [3]=0.85}, uses=3500, maxlevel=2},
+			choppy={times={[1]=2.50, [2]=1.50, [3]=.90}, uses=1500, maxlevel=2},
+			snappy={times={[1]=2.50, [2]=1.50, [3]=0.85}, uses=1500, maxlevel=2},
 		},
-		damage_groups = {fleshy=6},
+		damage_groups = {fleshy=8},
 		wear = 0,
 	},
-	
+
 	groups = {immortal = 1, forbidden = 1},
-	
+
 })
 
 
@@ -311,42 +311,41 @@ minetest.register_tool("lottother:glamdring", {
 		damage_groups = {fleshy=6},
 		wear = 0,
 	},
-	
+
 	groups = {immortal=1, forbidden = 1},
-	
+
 	on_use = function(itemstack, placer, pointed_thing)
 		local player = placer:get_player_name()
-		
-		
-		
+
+
+
 		if placer:get_player_control().sneak then
 			if mana.subtract(player, 200) then
 				minetest.sound_play("glamdring", { object = placer, max_hear_distance = 25, gain = 1 }, true)
 			end
 		else
-			
+
 			if mana.subtract(player, 30) then
-				
+				if not minetest.setting_getbool("creative_mode") then
+					itemstack:add_wear(65535/2000)
+
 				playereffects.cancel_effect_type("troll_polymorph", 1, player)
 				playereffects.cancel_effect_type("invisible", 1, player)
 				playereffects.cancel_effect_type("blaze_polymorph", 1, player)
 				playereffects.cancel_effect_type("priest_polymorph", 1, player)
-				
+
 				local dir = placer:get_look_dir();
 				local playerpos = placer:get_pos();
 				local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1+dir.y,z=playerpos.z+dir.z}, "lottother:blue")
 				local vec = {x=dir.x*4,y=dir.y*4,z=dir.z*4}
 				obj:setvelocity(vec)
 				minetest.sound_play("flamearrow", {pos = playerpos, gain = 0.5, max_hear_distance = 10})
+				end
 			end
 		end
 		return itemstack
 	end,
 })
-
-
-
-
 
 -- WIZARD STAFF
 -- Staff of "light pine cones on fire in different colors and burn wargs" kind of thing.
@@ -360,45 +359,46 @@ minetest.register_tool("lottother:staff", {
 		full_punch_interval = 1,
 		wear = 0,
 	},
-	
+
 	groups = {immortal=1, forbidden = 1},
-	
+
 	on_use = function(itemstack, user, pointed_thing)
-		
+
 		local player = user:get_player_name()
-							
+
 		playereffects.cancel_effect_type("troll_polymorph", 1, player)
 		playereffects.cancel_effect_type("invisible", 1, player)
 		playereffects.cancel_effect_type("blaze_polymorph", 1, player)
 		playereffects.cancel_effect_type("priest_polymorph", 1, player)
-		
+
 		if user:get_player_control().sneak then
-			
+
 			if mana.subtract(user:get_player_name(), 120) then
-				
+				itemstack:add_wear(65535/2000)
+
 				local heal_self_1 = minetest.after(1, function()
 					user:set_hp(user:get_hp() + 4)
 				end)
 				local heal_self_2 = minetest.after(2, function()
 					user:set_hp(user:get_hp() + 4)
 				end)
-				
-				
+
+
 				local pos = user:get_pos()
 				local node1def = minetest.get_node(pos)
 				local n = node1def.name
-				
-				
+
+
 				for dx=-3,3 do
 					for dy=-3,3 do
 						for dz=-1,2 do
 							local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
 							local node2def = minetest.get_node(p)
 							local n2 = node2def.name
-							
+
 							local firetype = ""
 							local rand = math.random(5)
-							
+
 							if rand == 1 then
 								firetype = "lottother:blue_flame"
 							elseif rand == 2 then
@@ -410,28 +410,29 @@ minetest.register_tool("lottother:staff", {
 							elseif rand == 5 then
 								firetype = "lottother:orange_flame"
 							end
-							
-							
-							
+
+
+
 							if n2 == "air" then
-								
+
 								minetest.set_node(p, {name=firetype})
-								
+
 							end
-							
+
 						end
 					end
 				end
-				
-				
-				
+
+
+
 			end
-		
-		
+
+
 		else
-		
+
 			local player = user:get_player_name()
 			if mana.subtract(player, 40) then
+				itemstack:add_wear(65535/2000)
 				local dir = user:get_look_dir();
 				local playerpos = user:get_pos();
 				local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1+dir.y,z=playerpos.z+dir.z}, "lottother:white")
@@ -441,10 +442,10 @@ minetest.register_tool("lottother:staff", {
 			end
 			return itemstack
 		end
-		
-		
+
+
 	end,
-	
+
 })
 
 
@@ -466,82 +467,82 @@ minetest.register_tool("lottother:saruman_staff", {
 		full_punch_interval = 1,
 		wear = 0,
 	},
-	
+
 	groups = {immortal=1, forbidden = 1},
-	
+
 	on_use = function(itemstack, user, pointed_thing)
-		
+
 		if user:get_player_control().sneak then
-			
+
 			if mana.subtract(user:get_player_name(), 25) then
-				
+
 				local teleported = false
 				local tries = 0
 				local collisionbox = {-0.2, 0, -0.2, 0.2, 0.5, 0.2}
-			
+
 				while ( teleported == false and tries <= 6 ) do
-				
+
 					local tele_dist = math.random(10) + 10
 					local check_pos = {}
-					
+
 					local p = user:get_pos()
-					
+
 					local rnd_yaw = (math.random(0, 360) - 180) / 180 * math.pi
-					
+
 					local ypos = p.y + collisionbox[2] -- just above floor
 					local dir_x = -math.sin(rnd_yaw) * (collisionbox[4] + 0.5)
 					local dir_z = math.cos(rnd_yaw) * (collisionbox[4] + 0.5)
-					
+
 					check_pos = {
 						x = p.x + (dir_x * tele_dist),
 						y = ypos,
 						z = p.z + (dir_z * tele_dist),
 					}
-					
-					
+
+
 					for i = -2, 2 do
-					
+
 						-- Can teleport up/down depending on terrain
-						
+
 						--if minetest.get_node({x = check_pos.x, y = check_pos.y + i, z = check_pos.z}).name ~= "air"
 						if minetest.get_node({x = check_pos.x, y = check_pos.y + i + 1, z = check_pos.z}).name == "air"
 						and minetest.get_node({x = check_pos.x, y = check_pos.y + i + 2, z = check_pos.z}).name == "air"
 						then
-							
+
 							effect(p, 15, "hyruletools_ice_effect.png")
-							
+
 							minetest.sound_play( "saruman_staff_teleport", { object = user, max_hear_distance = 30, gain = .5 } )
 							user:setpos({x = check_pos.x, y = check_pos.y + i + 2, z = check_pos.z})
-							
+
 							teleported = true
 						end
-						
+
 					end
-					
+
 					if teleported == false then
 						tries = tries + 1
 					end
-					
-					
+
+
 				end
 			end
-			
-		
-		
+
+
+
 		else
-			
+
 			local player = user:get_player_name()
-			
-			
-			
+
+
+
 			if mana.subtract(player, 40) then
-			
+
 				playereffects.cancel_effect_type("troll_polymorph", 1, player)
 				playereffects.cancel_effect_type("invisible", 1, player)
 				playereffects.cancel_effect_type("blaze_polymorph", 1, player)
 				playereffects.cancel_effect_type("priest_polymorph", 1, player)
-			
-			
+
+
 				local dir = user:get_look_dir();
 				local playerpos = user:get_pos();
 				local obj = minetest.env:add_entity({x=playerpos.x+dir.x,y=playerpos.y+1+dir.y,z=playerpos.z+dir.z}, "lottother:saruman_fire_player")
@@ -551,10 +552,10 @@ minetest.register_tool("lottother:saruman_staff", {
 			end
 			--return itemstack
 		end
-		
-		
+
+
 	end,
-	
+
 })
 
 
@@ -571,29 +572,29 @@ minetest.register_entity("lottother:saruman_fire_player", {
 	visual_size = {x = 0.01, y = 0.01},
 	physical = false,
 	timer=0,
-	
+
 	on_step = function(self, dtime, obj, pos)
-		
+
 		self.timer = self.timer + dtime
-		
-		local remove = minetest.after(3.0, function() 
+
+		local remove = minetest.after(3.0, function()
 			self.object:remove()
 		end)
-		
-		
+
+
 		local dmg = 0
 		local pos = self.object:get_pos()
-		
+
 		if pos and dmg == 0 and self.timer > 0.2 then
-		
-			local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 3)	
+
+			local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 3)
 			for k, obj in pairs(objs) do
 				if obj:get_luaentity() ~= nil then
 					if obj:get_luaentity().name ~= "lottother:saruman_fire_player"
 					and obj:get_luaentity().name ~= "__builtin:item" then
-						
+
 						-- Mob
-					
+
 						obj:punch(self.object, 1.0, {
 							full_punch_interval=1.0,
 							damage_groups={fleshy = 120},
@@ -602,32 +603,32 @@ minetest.register_entity("lottother:saruman_fire_player", {
 						dmg = 1
 					end
 				elseif obj:is_player() then
-					
+
 					-- Player
-					
-					
-					
+
+
+
 					obj:punch(self.object, 1.0, {
 						full_punch_interval=1.0,
 						damage_groups={fleshy = 40},
 					}, nil)
 					self.object:remove()
 					dmg = 1
-					
+
 					playereffects.apply_effect_type("on_fire", 10, obj)
-					
+
 				end
 			end
-			
-			
+
+
 			-- Hit something, random little explosions based on Saruman's abilities
 			if dmg == 1 then
-				
+
 				local rand1 = math.random(1,4)
 				local rand2 = math.random(1,4)
 				local rand3 = math.random(1,4)
 				local rand4 = math.random(1,4)
-				
+
 				if rand1 < 2 then
 					random_pos = {x = pos.x + math.random(-2,2), y = pos.y + math.random(-2,2), z = pos.z + math.random(-2,2)}
 					default.saruman_explode(random_pos, math.random(0.0,2.0), 1, 10) --code in default/functions
@@ -645,15 +646,15 @@ minetest.register_entity("lottother:saruman_fire_player", {
 					default.saruman_explode(random_pos, math.random(0.0,2.0), 1, 10) --code in default/functions
 				end
 			end
-			
+
 			if self.object:get_pos() then
-				
+
 				local apos = self.object:get_pos()
-				
+
 				local variance = 1
 				local size = 2
 				local texture = "saruman_fire.png"
-				
+
 				minetest.add_particlespawner{
 					amount = 10,
 					time = 0.3,
@@ -685,61 +686,61 @@ minetest.register_entity("lottother:saruman_fire_player", {
 minetest.register_entity("lottother:white", {
 	textures = {"hyruletools_swdbeam_light.png"},
 	collisionbox = {0, 0, 0, 0, 0, 0},
-	
+
 	physical = false,
 	timer=0,
 	lastpos={},
-	
+
 	on_step = function(self, dtime, obj, pos)
-		
+
 		self.timer = self.timer + dtime
-		
-		local remove = minetest.after(3.0, function() 
+
+		local remove = minetest.after(3.0, function()
 			self.object:remove()
 		end)
-		
-		
+
+
 		local dmg = 0
-		
+
 		local pos = self.object:get_pos()
 		local node = minetest.get_node(pos)
-		
+
 		if pos and dmg == 0 and self.timer > 0.1 then
-		
-			local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 1.5)	
+
+			local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 1.5)
 			for k, obj in pairs(objs) do
 				if obj:get_luaentity() ~= nil then
 					if obj:get_luaentity().name ~= "lottother:white"
 					and obj:get_luaentity().name ~= "__builtin:item" then
-						
+
 						-- Mob
-					
+
 						obj:punch(self.object, 1.0, {
 							full_punch_interval=1.0,
-							damage_groups={fleshy = 30},
+							damage_groups={fleshy = 20},
 						}, nil)
 						self.object:remove()
 						dmg = 1
 					end
 				else
-					
+
 					-- Player
-					
+
 					obj:punch(self.object, 1.0, {
 						full_punch_interval=1.0,
-						damage_groups={fleshy = 14},
+						damage_groups={fleshy = 20},
 					}, nil)
 					self.object:remove()
 					dmg = 1
 				end
 			end
-			
+
 		end
-		
-		
+
+
 		local firetype = ""
 		local rand = math.random(5)
-		
+
 		if rand == 1 then
 			firetype = "lottother:blue_flame"
 		elseif rand == 2 then
@@ -751,10 +752,10 @@ minetest.register_entity("lottother:white", {
 		elseif rand == 5 then
 			firetype = "lottother:orange_flame"
 		end
-		
-		
+
+
 		if self.lastpos.x ~= nil then
-		
+
 			if node.name ~= "air" and node.name ~= "lottthrowing:light" then
 				if minetest.get_node(self.lastpos).name == "air"
 				or minetest.get_node(self.lastpos).name == "lottthrowing:light"
@@ -762,82 +763,82 @@ minetest.register_entity("lottother:white", {
 					minetest.set_node(self.lastpos, {name=firetype})
 					self.object:remove()
 				end
-				
-				if math.floor(self.lastpos.x+0.5) ~= math.floor(pos.x+0.5) 
-				or math.floor(self.lastpos.y+0.5) ~= math.floor(pos.y+0.5) 
-				or math.floor(self.lastpos.z+0.5) ~= math.floor(pos.z+0.5) 
+
+				if math.floor(self.lastpos.x+0.5) ~= math.floor(pos.x+0.5)
+				or math.floor(self.lastpos.y+0.5) ~= math.floor(pos.y+0.5)
+				or math.floor(self.lastpos.z+0.5) ~= math.floor(pos.z+0.5)
 				then
-				
+
 					if minetest.get_node(self.lastpos).name == "lottthrowing:light" then
 						minetest.remove_node(self.lastpos)
 					end
-					
+
 					if minetest.get_node(pos).name == "air" then
 						minetest.set_node(pos, {name="lottthrowing:light"})
 					end
-					
+
 				end
 			end
 		end
-		
+
 		self.lastpos={x=pos.x, y=pos.y, z=pos.z}
-		
-		
-			
+
+
+
 	end
 })
 
 minetest.register_entity("lottother:blue", {
 	textures = {"hyruletools_swdbeam.png"},
 	collisionbox = {0, 0, 0, 0, 0, 0},
-	
+
 	physical = false,
 	timer=0,
-	
+
 	on_step = function(self, dtime, obj, pos)
-		
+
 		self.timer = self.timer + dtime
-		
-		local remove = minetest.after(1.4, function() 
+
+		local remove = minetest.after(1.4, function()
 			self.object:remove()
 		end)
-		
-		
+
+
 		local dmg = 0
 		local pos = self.object:get_pos()
-		
+
 		if pos and dmg == 0 and self.timer > 0.3 then
-		
-			local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 1.5)	
+
+			local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 1.5)
 			for k, obj in pairs(objs) do
 				if obj:get_luaentity() ~= nil then
 					if obj:get_luaentity().name ~= "lottother:blue"
 					and obj:get_luaentity().name ~= "__builtin:item" then
-						
+
 						-- Mob
-					
+
 						obj:punch(self.object, 1.0, {
 							full_punch_interval=1.0,
-							damage_groups={fleshy=12},
+							damage_groups={fleshy=16},
 						}, nil)
 						self.object:remove()
 						dmg = 1
 					end
 				else
-					
+
 					-- Player
-					
+
 					obj:punch(self.object, 1.0, {
 						full_punch_interval=1.0,
-						damage_groups={fleshy=10},
+						damage_groups={fleshy=16},
 					}, nil)
 					self.object:remove()
 					dmg = 1
 				end
 			end
-			
+
 		end
-			
+
 	end
 })
 
@@ -861,19 +862,19 @@ minetest.register_tool("lottother:glaive", {
 	inventory_image = "glaive.png",
 	wield_scale = {x = 2, y = 2, z = 1},
 	range = 7,
-	
+
 	sounds = {"hit_metal_metal_1","hit_metal_metal_2","hit_metal_metal_3","hit_metal_metal_4","hit_metal_metal_5","hit_metal_metal_6","hit_metal_metal_7","hit_metal_metal_8","hit_metal_metal_9","hit_metal_metal_10"},
-	
+
 	groups = {forbidden=1, immortal=1},
-	
-	
+
+
 	tool_capabilities = {
-		full_punch_interval = .5,
+		full_punch_interval = .25,
 		max_drop_level = 1,
-		--groupcaps={
-			--snappy={times={[1]=2.00, [2]=1.00, [3]=0.20}, uses=30, maxlevel=2},
-		--},
-		damage_groups = {fleshy=8},
+		groupcaps={
+			snappy={times={[1]=1.00, [2]=.50, [3]=0.10}, uses=1000, maxlevel=2},
+		},
+		damage_groups = {fleshy=10},
 		wear = 0,
 	}
 })
@@ -899,45 +900,45 @@ minetest.register_tool("lottother:grond", {
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
 	inventory_image = "lottweapons_grond.png",
 	wield_scale = {x = 3, y = 2, z = 1},
-	
+
 	groups = {immortal = 1, forbidden = 1},
-	
+
 	on_use = function(itemstack, user, pointed_thing)
-	
+
 		if user:get_player_control().sneak then
-			
+
 			if mana.subtract(user:get_player_name(), 80) then
-				
+
 				if playereffects.has_effect_type(user:get_player_name(), "troll_polymorph") then
-					
-					
+
+
 					-- REMOVE NAZGUL
-					
+
 					invisibility[user:get_player_name()] = false
 					playereffects.cancel_effect_type("troll_polymorph", 1, user:get_player_name())
-					
-					
+
+
 					--multiskin:update_player_visuals(user)
 				else
-					
+
 					-- NAZGUL
-					
+
 					playereffects.apply_effect_type("troll_polymorph", 3600, user)
 					effect(pos, 60, "mobs_fairy_spark_black.png", 4, 6)
-					
+
 				end
-				
+
 			end
-			
+
 		else
-			
+
 			playereffects.cancel_effect_type("troll_polymorph", 1, user:get_player_name())
 			playereffects.cancel_effect_type("invisible", 1, user:get_player_name())
 			playereffects.cancel_effect_type("blaze_polymorph", 1, user:get_player_name())
 			playereffects.cancel_effect_type("priest_polymorph", 1, user:get_player_name())
-	
+
 			if pointed_thing.type == "nothing" then
-				
+
 				local dir = user:get_look_dir()
 				local pos = user:get_pos()
 				local new_pos = {
@@ -945,30 +946,30 @@ minetest.register_tool("lottother:grond", {
 					y = pos.y + (dir.y * 10),
 					z = pos.z + (dir.z * 10),
 				}
-				
+
 				if mana.subtract(user:get_player_name(), 100) then
 					default.explode_weapon(new_pos, 1, 2, 30) --code in default/functions
 				end
-				
-				
+
+
 			elseif pointed_thing.type == "node" or pointed_thing.type == "object" then
-			
+
 				local pos = minetest.get_pointed_thing_position(pointed_thing)
 				local player = user:get_player_name()
-				
+
 				if mana.subtract(player, 100) then
-					
+
 					playereffects.cancel_effect_type("troll_polymorph", 1, player)
 					playereffects.cancel_effect_type("invisible", 1, player)
 					playereffects.cancel_effect_type("blaze_polymorph", 1, player)
 					playereffects.cancel_effect_type("priest_polymorph", 1, player)
-					
+
 					default.explode_weapon(pos, 1, 2, 30)
 				end
 			end
 		end
 	end,
-	
+
 	tool_capabilities = {
 		full_punch_interval = 0.25,
 		--max_drop_level=2,
@@ -1009,13 +1010,13 @@ minetest.register_craft({
 minetest.register_tool("lottother:sting", {
 	description = minetest.colorize("darkviolet", "Sting") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
-	
+
 	inventory_image = "lottweapons_sting.png",
 	wield_image = "lottweapons_sting.png",
 	wield_scale = {x = 1.5, y = 1.5, z = 1},
-	
+
 	groups = {immortal = 1, forbidden = 1},
-	
+
 	tool_capabilities = {
 		full_punch_interval = 1,
 		groupcaps={
@@ -1024,113 +1025,113 @@ minetest.register_tool("lottother:sting", {
 		damage_groups = {fleshy=6},
 		wear = 0,
 	},
-	
+
 	on_use = function(itemstack, user, pointed_thing)
-		
-		
+
+
 		if user:get_player_control().sneak then
-			
+
 			if mana.subtract(user:get_player_name(), 80) then
-				
+
 				if playereffects.has_effect_type(user:get_player_name(), "rat_polymorph") then
-					
+
 					-- REMOVE RAT
-					
+
 					playereffects.cancel_effect_type("rat_polymorph", 1, user:get_player_name())
-					
+
 					--multiskin:update_player_visuals(user)
-					
-					
+
+
 				else
-					
-					
+
+
 					-- RAT
-					
+
 					playereffects.apply_effect_type("rat_polymorph", 3600, user)
-					
+
 					effect(pos, 60, "mobs_fairy_spark_black.png", 4, 6)
-					
+
 				end
-				
+
 			end
-		
-		
+
+
 		else
-			
+
 			local dir = user:get_look_dir()
 			local pos = user:get_pos()
-			
+
 			local teleported = false
 			local damaged = false
-			
+
 			local tele_dist = 30
-			
+
 			local check_pos = {}
-			
+
 			-- Check for empty space starting 30 units away from user
 			-- Might go through walls?
-			
+
 			for i = 1, 30 do
-				
+
 				if teleported == false then
-				
+
 					check_pos = {
 						x = pos.x + (dir.x * tele_dist),
 						y = pos.y + (dir.y * tele_dist),
 						z = pos.z + (dir.z * tele_dist),
 					}
-					
+
 					if minetest.get_node({x = check_pos.x, y = check_pos.y + 1, z = check_pos.z}).name == "air"
 						and minetest.get_node({x = check_pos.x, y = check_pos.y + 2, z = check_pos.z}).name == "air"
 						and areas:canInteract(check_pos, user:get_player_name())
 						then
-						
+
 						-- Safe to teleport
-						
+
 						if mana.subtract(user:get_player_name(), 60) then
-							
+
 							local player = user:get_player_name()
-							
+
 							playereffects.cancel_effect_type("troll_polymorph", 1, player)
 							playereffects.cancel_effect_type("invisible", 1, player)
 							playereffects.cancel_effect_type("blaze_polymorph", 1, player)
 							playereffects.cancel_effect_type("priest_polymorph", 1, player)
-							
+
 							user:setpos({x = check_pos.x, y = check_pos.y + 1, z = check_pos.z})
-						
+
 							effect({x = check_pos.x, y = check_pos.y + 1, z = check_pos.z}, 10, "hyruletools_yellowstar.png", 1, 1)
 								minetest.sound_play("throwing_teleport_arrow", {gain = .25, check_pos, to_player = user:get_player_name()
 							})
-						
+
 							teleported = true
 						end
-						
-						
+
+
 					end
-					
+
 				elseif damaged == false then
-					
+
 					-- Have teleported, now damage all the nodes in a line from pos to check_pos, using tele_dist
-					
+
 					for i = 1, tele_dist - 2 do
-						
+
 						--This protects user from self damage once he arrives :)
-						
+
 						check_pos = {
 							x = pos.x + (dir.x * i),
 							y = pos.y + (dir.y * i),
 							z = pos.z + (dir.z * i),
 						}
-						
+
 						-- From default/functions.lua
 						default.explode_sting(check_pos, 1, 2, 6)
-						
+
 						damaged = true
 					end
 				end
-			
+
 				tele_dist = tele_dist - 1
-				
+
 			end
 		end
 	end,
@@ -1139,13 +1140,13 @@ minetest.register_tool("lottother:sting", {
 minetest.register_tool("lottother:sting_blue", {
 	description = minetest.colorize("darkviolet", "Sting") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
-	
+
 	inventory_image = "lottweapons_sting.png",
 	wield_image = "lottweapons_sting_glow.png",
 	wield_scale = {x = 1, y = 1, z = 1},
-	
+
 	groups = {immortal = 1, not_in_creative_inventory=1},
-	
+
 	tool_capabilities = {
 		full_punch_interval = 1,
 		groupcaps={
@@ -1154,112 +1155,112 @@ minetest.register_tool("lottother:sting_blue", {
 		damage_groups = {fleshy=6},
 		wear = 0,
 	},
-	
+
 	on_use = function(itemstack, user, pointed_thing)
-		
+
 		if user:get_player_control().sneak then
-			
+
 			if mana.subtract(user:get_player_name(), 80) then
-				
+
 				if playereffects.has_effect_type(user:get_player_name(), "rat_polymorph") then
-					
+
 					-- REMOVE RAT
-					
+
 					playereffects.cancel_effect_type("rat_polymorph", 1, user:get_player_name())
-					
+
 					--multiskin:update_player_visuals(user)
-					
+
 				else
-					
-					
+
+
 					-- RAT
-					
+
 					playereffects.apply_effect_type("rat_polymorph", 3600, user)
-					
+
 					effect(pos, 60, "mobs_fairy_spark_black.png", 4, 6)
-					
+
 				end
-				
+
 			end
-		
-		
+
+
 		else
-			
+
 			local dir = user:get_look_dir()
 			local pos = user:get_pos()
-			
+
 			local teleported = false
 			local damaged = false
-			
+
 			local tele_dist = 30
-			
+
 			local check_pos = {}
-			
+
 			-- Check for empty space starting 30 units away from user
 			-- Goes through walls!
-			
+
 			for i = 1, 30 do
-				
+
 				if teleported == false then
-				
+
 					check_pos = {
 						x = pos.x + (dir.x * tele_dist),
 						y = pos.y + (dir.y * tele_dist),
 						z = pos.z + (dir.z * tele_dist),
 					}
-					
+
 					if minetest.get_node({x = check_pos.x, y = check_pos.y + 1, z = check_pos.z}).name == "air"
 						and minetest.get_node({x = check_pos.x, y = check_pos.y + 2, z = check_pos.z}).name == "air"
 						and areas:canInteract(check_pos, user:get_player_name())
 						then
-						
+
 						-- Safe to teleport
-						
+
 						if mana.subtract(user:get_player_name(), 60) then
-							
+
 							local player = user:get_player_name()
-							
+
 							playereffects.cancel_effect_type("troll_polymorph", 1, player)
 							playereffects.cancel_effect_type("invisible", 1, player)
 							playereffects.cancel_effect_type("blaze_polymorph", 1, player)
 							playereffects.cancel_effect_type("priest_polymorph", 1, player)
-							
+
 							user:setpos({x = check_pos.x, y = check_pos.y + 1, z = check_pos.z})
-						
+
 							effect({x = check_pos.x, y = check_pos.y + 1, z = check_pos.z}, 10, "hyruletools_yellowstar.png", 1, 1)
 								minetest.sound_play("throwing_teleport_arrow", {gain = .25, check_pos, to_player = user:get_player_name()
 							})
-						
+
 							teleported = true
 						end
-						
-						
+
+
 					end
-					
+
 				elseif damaged == false then
-					
+
 					-- Have teleported, now damage all the nodes in a line from pos to check_pos, using tele_dist
-					
+
 					for i = 1, tele_dist - 2 do
-						
+
 						check_pos = {
 							x = pos.x + (dir.x * i),
 							y = pos.y + (dir.y * i),
 							z = pos.z + (dir.z * i),
 						}
-						
+
 						-- From default/functions.lua
 						default.explode_sting(check_pos, 1, 2, 6)
-						
+
 						damaged = true
 					end
 				end
-			
+
 				tele_dist = tele_dist - 1
-				
+
 			end
 		end
-		
+
 	end,
 })
 
@@ -1285,20 +1286,20 @@ minetest.register_craftitem("lottother:rod_of_defense", {
 	description = minetest.colorize("blue", "Rod of Defense") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
 	inventory_image = "rod_of_defense.png",
-	
+
 	groups = {immortal = 1, forbidden = 1},
-	
-	
+
+
 	on_use = function(itemstack, placer, pointed_thing)
-		
+
 		if mana.subtract(placer:get_player_name(), 60) then
-			
+
 			playereffects.cancel_effect_type("troll_polymorph", 1, placer:get_player_name())
 			playereffects.cancel_effect_type("invisible", 1, placer:get_player_name())
-			
+
 			local dir = placer:get_look_dir();
 			local playerpos = placer:get_pos();
-			
+
 			minetest.add_particlespawner(
 				10, --amount
 				0.1, --time
@@ -1315,17 +1316,17 @@ minetest.register_craftitem("lottother:rod_of_defense", {
 				false, --collisiondetection
 				"hyruletools_crest.png" --texture
 			)
-			
+
 			local rand = math.random(4)
 			local display_name = ""
 			local entity = ""
-			
+
 			local playerpos = placer:get_pos();
 			local position = {x=playerpos.x+2+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+2+dir.z}
-			
+
 			local owner = placer:get_player_name()
 			local player = owner
-			
+
 			if rand == 1 then
 				display_name = owner .. "'s Elf Guardian"
 				entity = "lottmobs:elf_guard"
@@ -1339,9 +1340,9 @@ minetest.register_craftitem("lottother:rod_of_defense", {
 				display_name = owner .. "'s Soldier of Rohan"
 				entity = "lottmobs:rohan_guardian"
 			end
-			
+
 			lottmobs.new_minion(player, display_name, entity, position)
-			
+
 		end
 	end
 })
@@ -1358,35 +1359,35 @@ minetest.register_craftitem("lottother:rod_of_defense", {
 minetest.register_craftitem("lottother:rod_of_polymorph", {
 	description = minetest.colorize("red", "Rod of Polymorph") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
-	
+
 	inventory_image = "rod_of_polymorph.png",
 	groups = {immortal = 1, forbidden = 1},
-	
+
 	on_use = function(itemstack, user, pointed_thing)
-		
+
 		local pos = user:get_pos()
-		
+
 		if user:get_player_control().sneak then
-			
+
 			if mana.subtract(user:get_player_name(), 160) then
-				
+
 				-- BUTTERFLY
-				
+
 				playereffects.apply_effect_type("butterfly_polymorph", 15, user)
-				
+
 				effect(pos, 60, "mobs_fairy_spark.png", 4, 6)
-				
+
 			end
-		
+
 		else
 			if mana.subtract(user:get_player_name(), 160) then
-				
+
 				-- WABBIT
-				
+
 				playereffects.apply_effect_type("bunny_polymorph", 15, user)
-				
+
 				effect(pos, 60, "mobs_fairy_spark.png", 4, 6)
-				
+
 			end
 		end
 	end,
@@ -1409,63 +1410,63 @@ minetest.register_craftitem("lottother:rod_of_polymorph", {
 minetest.register_craftitem("lottother:rod_of_doom", {
 	description = minetest.colorize("darkviolet", "Rod of Doom") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
-	
+
 	inventory_image = "rod_of_doom.png",
 	groups = {immortal = 1, forbidden = 1},
-	
+
 	on_use = function(itemstack, user, pointed_thing)
-		
+
 		if user:get_player_control().sneak then
-		
+
 			if mana.subtract(user:get_player_name(), 80) then
-				
+
 				-- GHOST
-				
+
 				playereffects.apply_effect_type("ghost_polymorph", 30, user)
-				
+
 				effect(pos, 60, "mobs_fairy_spark_black.png", 4, 6)
-				
+
 			end
-		
-		
+
+
 		else
-		
-		
+
+
 			local dir = user:get_look_dir()
 			local pos = user:get_pos()
-			
+
 			local check_pos = {}
-			
+
 			local dist = 10
-			
+
 			if mana.subtract(user:get_player_name(), 180) then
-				
-				
+
+
 				local player = user:get_player_name()
-							
+
 				playereffects.cancel_effect_type("troll_polymorph", 1, user:get_player_name())
 				playereffects.cancel_effect_type("invisible", 1, user:get_player_name())
 				playereffects.cancel_effect_type("blaze_polymorph", 1, player)
 				playereffects.cancel_effect_type("priest_polymorph", 1, player)
-				
+
 				minetest.sound_play("rod_of_doom", {pos = pos, gain = 0.6, max_hear_distance = 30})
-				
+
 				for i = 2, dist do
-							
+
 					check_pos = {
 						x = pos.x + (dir.x * i),
 						y = pos.y + (dir.y * i),
 						z = pos.z + (dir.z * i),
 					}
-					
+
 					-- From default/functions.lua
 					-- pos, TTL, radius, duration
 					default.doom_beam(check_pos, 0, 1.5, 5, 100)
-					
+
 				end
 			end
 		end
-		
+
 	end
 })
 
@@ -1481,48 +1482,48 @@ minetest.register_craftitem("lottother:rod_of_doom", {
 minetest.register_craftitem("lottother:rod_of_healing", {
 	description = minetest.colorize("goldenrodyellow", "Rod of Healing") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
-	
+
 	inventory_image = "rod_of_healing.png",
 	groups = {immortal = 1, forbidden = 1},
-	
+
 	on_use = function(itemstack, user, pointed_thing)
-		
-		
+
+
 		if user:get_player_control().sneak then
-		
+
 			if mana.subtract(user:get_player_name(), 80) then
-				
+
 				-- Blaze healer form
 				-- Not LOTR friendly, just cute
-				
+
 				playereffects.apply_effect_type("blaze_polymorph", 300, user)
-				
+
 				effect(pos, 60, "mobs_fairy_spark.png", 4, 6)
-				
+
 			end
-		
-		
+
+
 		else
-		
+
 			local dir = user:get_look_dir()
 			local pos = user:get_pos()
-			
+
 			local check_pos = {}
 			local dist = 15
-			
+
 			local radius = 1.2
 			local amount = 4
 			local mana_amount = 60
-			
+
 			local healed_players = {}
-			
+
 			local healer_name = user:get_player_name()
 			local heal_amount = 6
 			local form = false
-			
+
 			-- Blaze form is a healing form and will heal 2x
 			-- Also damage shield if healed player is full health
-			
+
 			if playereffects.has_effect_type(healer_name, "blaze_polymorph") then
 				form = true
 				heal_amount = heal_amount * 2
@@ -1531,56 +1532,56 @@ minetest.register_craftitem("lottother:rod_of_healing", {
 				radius = 2
 				mana_amount = 30
 			else
-							
+
 				playereffects.cancel_effect_type("troll_polymorph", 1, healer_name)
 				playereffects.cancel_effect_type("invisible", 1, healer_name)
 			end
-			
+
 			if mana.subtract(healer_name, mana_amount) then
-				
+
 				user:set_hp(user:get_hp() + heal_amount)
-				
+
 				if form == true and user:get_hp() == user:get_properties().hp_max then
 					playereffects.apply_effect_type("damage_shield", 20, user)
 				end
-				
+
 				minetest.sound_play("rod_of_healing", {pos = pos, gain = 0.2, max_hear_distance = 15})
 
 				for i = 2, dist do
-					
+
 					check_pos = {
 						x = pos.x + (dir.x * i),
 						y = pos.y + (dir.y * i),
 						z = pos.z + (dir.z * i),
 					}
-					
+
 					local objects = minetest.get_objects_inside_radius(check_pos, radius)
-	
+
 					for _,obj in ipairs(objects) do
-						
+
 						if obj:is_player() then
-							
+
 							local name = obj:get_player_name()
 							local already_healed = 0
-							
+
 							for _,v in ipairs(healed_players) do
-								
+
 								if v == name then
 									already_healed = 1
 								end
 							end
-							
+
 							if already_healed == 0 and obj:get_hp() > 0 then
-								
-							
+
+
 								obj:set_hp(obj:get_hp() + amount)
 								table.insert(healed_players, name)
-								
+
 								if form == true and obj:get_hp() == obj:get_properties().hp_max then
 									playereffects.apply_effect_type("damage_shield", 20, obj)
 								end
-								
-								
+
+
 								--[[
 								if not playereffects.has_effect_type(name, "rat_polymorph")
 								and not playereffects.has_effect_type(name, "blaze_polymorph")
@@ -1593,23 +1594,23 @@ minetest.register_craftitem("lottother:rod_of_healing", {
 								and not playereffects.has_effect_type(name, "troll_polymorph")
 								then
 								--]]
-									
+
 									local obj_pos = obj:get_pos()
-									
-									obj_pos = { 
+
+									obj_pos = {
 										x = obj_pos.x,
 										y = obj_pos.y + 1.5,
 										z = obj_pos.z
 									}
-									
+
 									effect( obj_pos, 80, "rod_heal.png", 1, 2)
-									
+
 								--end
 							end
-							
+
 						end
 					end
-					
+
 					minetest.add_particlespawner(
 						4,
 						0.1,
@@ -1626,12 +1627,12 @@ minetest.register_craftitem("lottother:rod_of_healing", {
 						false,
 						"rod_heal.png"
 					)
-					
+
 				end
-				
+
 			end
 		end
-		
+
 	end
 })
 
@@ -1710,52 +1711,52 @@ minetest.register_craftitem("lottother:rod_base", {
 minetest.register_craftitem("lottother:silver_silmaril", {
 	description = minetest.colorize("Silver", "Silmaril of Telperion") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
-	
+
 	inventory_image = "silmaril_silver.png",
 	groups = {immortal = 1, forbidden = 1},
-	
+
 	on_use = function(itemstack, user, pointed_thing)
-		
-		
+
+
 		if user:get_player_control().sneak then
-			
+
 			if mana.subtract(user:get_player_name(), 200) then
-				
+
 				if playereffects.has_effect_type(user:get_player_name(), "bat_polymorph") then
-					
+
 					-- REMOVE BAT
-					
-					
+
+
 					playereffects.cancel_effect_type("bat_polymorph", 1, user:get_player_name())
-					
+
 					--multiskin:update_player_visuals(user)
 				else
-					
-					
+
+
 					-- BAT
-					
+
 					playereffects.apply_effect_type("bat_polymorph", 120, user)
-					
+
 					effect(pos, 60, "mobs_fairy_spark_black.png", 4, 6)
-					
+
 				end
-				
+
 			end
-			
-			
-			
+
+
+
 		else
-			
+
 			if mana.subtract(user:get_player_name(), 100) then
-				
+
 				local player = user:get_player_name()
-							
+
 				playereffects.cancel_effect_type("troll_polymorph", 1, player)
 				playereffects.cancel_effect_type("invisible", 1, player)
-				
+
 				local dir = user:get_look_dir();
 				local playerpos = user:get_pos();
-				
+
 				minetest.add_particlespawner(
 					10, --amount
 					0.1, --time
@@ -1772,16 +1773,16 @@ minetest.register_craftitem("lottother:silver_silmaril", {
 					false, --collisiondetection
 					"hyruletools_blackcrest.png" --texture
 				)
-				
+
 				local rand = math.random(100)
 				local display_name = ""
 				local entity = ""
-				
+
 				local position = {x=playerpos.x+2+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+2+dir.z}
-				
+
 				local owner = user:get_player_name()
 				local player = owner
-				
+
 				if rand < 50 then
 					display_name = owner .. "'s Spider Guardian"
 					entity = "lottmobs:spider_guard"
@@ -1792,14 +1793,14 @@ minetest.register_craftitem("lottother:silver_silmaril", {
 					display_name = owner .. "'s Fairy Guardian"
 					entity = "lottmobs:fairy_guard"
 				end
-				
+
 				lottmobs.new_minion(player, display_name, entity, position)
-				
+
 			end
-			
+
 		end
-		
-		
+
+
 	end
 })
 
@@ -1819,87 +1820,87 @@ minetest.register_craftitem("lottother:silver_silmaril", {
 minetest.register_craftitem("lottother:gold_silmaril", {
 	description = minetest.colorize("Gold", "Silmaril of Laurelin") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
-	
+
 	inventory_image = "silmaril_gold.png",
 	groups = {immortal = 1, forbidden = 1},
-	
+
 	on_use = function(itemstack, user, pointed_thing)
-		
-		
+
+
 		if user:get_player_control().sneak then
-			
+
 			-- More powerful version of blind/paralyze
-			
+
 			local dir = user:get_look_dir()
 			local pos = user:get_pos()
-			
+
 			local check_pos = {}
-			
+
 			local dist = 10
-			
+
 			if mana.subtract(user:get_player_name(), 180) then
-				
+
 				playereffects.cancel_effect_type("troll_polymorph", 1, user:get_player_name())
 				playereffects.cancel_effect_type("invisible", 1, user:get_player_name())
-				
+
 				minetest.sound_play("rod_of_doom", {pos = pos, gain = 0.6, max_hear_distance = 30})
-				
+
 				for i = 2, dist do
-							
+
 					check_pos = {
 						x = pos.x + (dir.x * i),
 						y = pos.y + (dir.y * i),
 						z = pos.z + (dir.z * i),
 					}
-					
+
 					-- From default/functions.lua
 					-- pos, TTL, radius, duration, damage
-					
+
 					default.doom_beam(check_pos, 0, 1.5, 6, 200)
-					
+
 				end
 			end
-			
-		elseif user:get_player_control().aux1 then 
-			
+
+		elseif user:get_player_control().aux1 then
+
 			if mana.subtract(user:get_player_name(), 100) then
-				
+
 				if playereffects.has_effect_type(user:get_player_name(), "priest_polymorph") then
-					
+
 					playereffects.cancel_effect_type("priest_polymorph", 1, user:get_player_name())
 					--multiskin:update_player_visuals(user)
-						
+
 				else
-					
+
 					playereffects.apply_effect_type("priest_polymorph", 3600, user)
 					effect(pos, 60, "mobs_fairy_spark_black.png", 4, 6)
-					
+
 				end
 			end
-			
+
 		else
-			
+
 			-- Heal beam
-			
+
 			local dir = user:get_look_dir()
 			local pos = user:get_pos()
-			
+
 			local check_pos = {}
 			local dist = 20
-			
+
 			local radius = 1.5
 			local amount = 8
 			local mana_amount = 30
-			
+
 			local healed_players = {}
-			
+
 			local healer_name = user:get_player_name()
 			local heal_amount = 10
 			local form = false
-			
+
 			-- Priest form will heal 2x
 			-- Also damage shield if healed player is full health
-			
+
 			if playereffects.has_effect_type(healer_name, "priest_polymorph") then
 				form = true
 				heal_amount = heal_amount * 2
@@ -1911,69 +1912,69 @@ minetest.register_craftitem("lottother:gold_silmaril", {
 				playereffects.cancel_effect_type("troll_polymorph", 1, healer_name)
 				playereffects.cancel_effect_type("invisible", 1, healer_name)
 			end
-			
+
 			if mana.subtract(healer_name, mana_amount) then
-				
+
 				-- Also cures debuffs!
-				
+
 				playereffects.cancel_effect_type("blind", 1, healer_name)
 				playereffects.cancel_effect_type("paralyze", 1, healer_name)
 				playereffects.cancel_effect_type("on_fire", 1, healer_name)
 				playereffects.cancel_effect_type("spider_poison_health", 1, healer_name)
 				playereffects.cancel_effect_type("spider_poison_slow", 1, healer_name)
-				
+
 				user:set_hp(user:get_hp() + heal_amount)
-				
+
 				if form == true and user:get_hp() == user:get_properties().hp_max then
 					playereffects.apply_effect_type("damage_shield", 300, user)
 				end
-				
+
 				minetest.sound_play("rod_of_healing", {pos = pos, gain = 0.4, max_hear_distance = 15})
 
 				for i = 2, dist do
-					
+
 					check_pos = {
 						x = pos.x + (dir.x * i),
 						y = pos.y + (dir.y * i),
 						z = pos.z + (dir.z * i),
 					}
-					
+
 					local objects = minetest.get_objects_inside_radius(check_pos, radius)
-	
+
 					for _,obj in ipairs(objects) do
-						
+
 						if obj:is_player() then
-							
+
 							local name = obj:get_player_name()
 							local already_healed = 0
-							
+
 							for _,v in ipairs(healed_players) do
-								
+
 								if v == name then
 									already_healed = 1
 								end
 							end
-							
+
 							if already_healed == 0 and obj:get_hp() > 0 then
-								
+
 								-- Cure debuffs
-				
+
 								playereffects.cancel_effect_type("blind", 1, name)
 								playereffects.cancel_effect_type("paralyze", 1, name)
 								playereffects.cancel_effect_type("on_fire", 1, name)
 								playereffects.cancel_effect_type("spider_poison_health", 1, name)
 								playereffects.cancel_effect_type("spider_poison_slow", 1, name)
-								
-								
-								
+
+
+
 								obj:set_hp(obj:get_hp() + amount)
 								table.insert(healed_players, name)
-								
+
 								if form == true and obj:get_hp() == obj:get_properties().hp_max then
 									playereffects.apply_effect_type("damage_shield", 300, obj)
 								end
-								
-								
+
+
 								--[[
 								if not playereffects.has_effect_type(name, "rat_polymorph")
 								and not playereffects.has_effect_type(name, "blaze_polymorph")
@@ -1986,20 +1987,20 @@ minetest.register_craftitem("lottother:gold_silmaril", {
 								and not playereffects.has_effect_type(name, "troll_polymorph")
 								then
 								--]]
-									
+
 								local obj_pos = obj:get_pos()
-								
-								obj_pos = { 
+
+								obj_pos = {
 									x = obj_pos.x,
 									y = obj_pos.y + 0.5,
 									z = obj_pos.z
 								}
-								
+
 								effect( obj_pos, 80, "silmaril_heal.png", 1, 2)
 							end
 						end
 					end
-					
+
 					minetest.add_particlespawner(
 						4,
 						0.1,
@@ -2016,7 +2017,7 @@ minetest.register_craftitem("lottother:gold_silmaril", {
 						false,
 						"silmaril_heal.png"
 					)
-					
+
 				end
 			end
 		end
@@ -2042,11 +2043,11 @@ minetest.register_craftitem("lottother:phial", {
     wear = 0,
 
     on_use = function(itemstack, user, pointed_thing)
-    	
+
     	local name = user:get_player_name()
-    	
+
 		if mana.subtract(name, 100) then
-			
+
 			--local obj = user:get_luaentity()
 			minetest.sound_play("light", { object = user, max_hear_distance = 25, gain = .4 }, true)
 		end
@@ -2079,36 +2080,36 @@ minetest.register_craftitem("lottother:elfstone", {
     wear = 0,
 
     on_use = function(itemstack, user, pointed_thing)
-    	
+
     	local name = user:get_player_name()
     	local pos = user:get_pos()
-    	
+
     	if user:get_player_control().sneak then
-			
+
 			if mana.subtract(name, 200) then
-				
+
 				sethome.set(name, user:get_pos())
-				
+
 				minetest.chat_send_player(name, minetest.colorize("lightgreen", "*** You bind your Elfstone to this location."))
-				
+
 			end
-		
+
 		else
-			
+
 			if mana.subtract(name, 200) then
-				
+
 				effect({x = pos.x, y = pos.y + 1, z = pos.z}, 80, "hyruletools_yellowstar.png", 4, 6)
-				
+
 				minetest.chat_send_player(user:get_player_name(), minetest.colorize("green", "*** You activate your Elfstone!"))
-				
+
 				minetest.after(10, function()
 					sethome.go(name)
-					
+
 					minetest.chat_send_player(user:get_player_name(), minetest.colorize("lightgreen", "*** The Elfstone takes you home!"))
 				end )
-				
+
 			end
-			
+
 		end
     end,
 })
@@ -2140,12 +2141,12 @@ minetest.register_craftitem("lottother:hobbit_invis", {
     wear = 0,
 
     on_use = function(itemstack, user, pointed_thing)
-    	
+
     	local player = user:get_player_name()
     	local player_privs = minetest.get_player_privs(player)
-    	
+
     	if mana.subtract(player, 100) and player_privs.GAMEhobbit then
-    	
+
 			playereffects.apply_effect_type("invisible", 10 , user)
 		end
     end,
@@ -2165,35 +2166,35 @@ minetest.register_craftitem("lottother:hobbit_invis", {
 minetest.register_entity("lottother:white", {
 	textures = {"hyruletools_swdbeam_light.png"},
 	collisionbox = {0, 0, 0, 0, 0, 0},
-	
+
 	physical = false,
 	timer=0,
 	lastpos={},
-	
+
 	on_step = function(self, dtime, obj, pos)
-		
+
 		self.timer = self.timer + dtime
-		
-		local remove = minetest.after(3.0, function() 
+
+		local remove = minetest.after(3.0, function()
 			self.object:remove()
 		end)
-		
-		
+
+
 		local dmg = 0
-		
+
 		local pos = self.object:get_pos()
 		local node = minetest.get_node(pos)
-		
+
 		if pos and dmg == 0 and self.timer > 0.1 then
-		
-			local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 1.5)	
+
+			local objs = minetest.get_objects_inside_radius({x=pos.x,y=pos.y,z=pos.z}, 1.5)
 			for k, obj in pairs(objs) do
 				if obj:get_luaentity() ~= nil then
 					if obj:get_luaentity().name ~= "lottother:white"
 					and obj:get_luaentity().name ~= "__builtin:item" then
-						
+
 						-- Mob
-					
+
 						obj:punch(self.object, 1.0, {
 							full_punch_interval=1.0,
 							damage_groups={fleshy=24},
@@ -2202,9 +2203,9 @@ minetest.register_entity("lottother:white", {
 						dmg = 1
 					end
 				else
-					
+
 					-- Player
-					
+
 					obj:punch(self.object, 1.0, {
 						full_punch_interval=1.0,
 						damage_groups={fleshy=12},
@@ -2213,13 +2214,13 @@ minetest.register_entity("lottother:white", {
 					dmg = 1
 				end
 			end
-			
+
 		end
-		
-		
+
+
 		local firetype = ""
 		local rand = math.random(5)
-		
+
 		if rand == 1 then
 			firetype = "lottother:blue_flame"
 		elseif rand == 2 then
@@ -2231,10 +2232,10 @@ minetest.register_entity("lottother:white", {
 		elseif rand == 5 then
 			firetype = "lottother:orange_flame"
 		end
-		
-		
+
+
 		if self.lastpos.x ~= nil then
-		
+
 			if node.name ~= "air" and node.name ~= "lottthrowing:light" then
 				if minetest.get_node(self.lastpos).name == "air"
 				or minetest.get_node(self.lastpos).name == "lottthrowing:light"
@@ -2242,28 +2243,28 @@ minetest.register_entity("lottother:white", {
 					minetest.set_node(self.lastpos, {name=firetype})
 					self.object:remove()
 				end
-				
-				if math.floor(self.lastpos.x+0.5) ~= math.floor(pos.x+0.5) 
-				or math.floor(self.lastpos.y+0.5) ~= math.floor(pos.y+0.5) 
-				or math.floor(self.lastpos.z+0.5) ~= math.floor(pos.z+0.5) 
+
+				if math.floor(self.lastpos.x+0.5) ~= math.floor(pos.x+0.5)
+				or math.floor(self.lastpos.y+0.5) ~= math.floor(pos.y+0.5)
+				or math.floor(self.lastpos.z+0.5) ~= math.floor(pos.z+0.5)
 				then
-				
+
 					if minetest.get_node(self.lastpos).name == "lottthrowing:light" then
 						minetest.remove_node(self.lastpos)
 					end
-					
+
 					if minetest.get_node(pos).name == "air" then
 						minetest.set_node(pos, {name="lottthrowing:light"})
 					end
-					
+
 				end
 			end
 		end
-		
+
 		self.lastpos={x=pos.x, y=pos.y, z=pos.z}
-		
-		
-			
+
+
+
 	end
 })
 
@@ -2480,5 +2481,3 @@ minetest.register_craft({
 	},
 	groups = {forbidden = 1},
 })
-
-

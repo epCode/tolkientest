@@ -16,7 +16,7 @@ minetest.register_tool("lottarmor:leggings_dwarf", {
 	description = minetest.colorize("Gray", "Dwarven Leggings") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
 	inventory_image = "lottarmor_inv_leggings_dwarf.png",
-	groups = {armor_legs=20, armor_heal=0, armor_healing=0, physics_speed=0, immortal=1},
+	groups = {armor_legs=10, armor_heal=0, armor_healing=0, physics_speed=0, immortal=1},
 	wear = 0,
 })
 
@@ -25,7 +25,7 @@ minetest.register_tool("lottarmor:boots_dwarf", {
 	description = minetest.colorize("Gray", "Dwarven Boots") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
 	inventory_image = "lottarmor_inv_boots_dwarf.png",
-	groups = {armor_feet=15, armor_heal=0, armor_healing=0, physics_speed=0, immortal=1},
+	groups = {armor_feet=8, armor_heal=0, armor_healing=0, physics_speed=0, immortal=1},
 	wear = 0,
 })
 
@@ -33,7 +33,7 @@ minetest.register_tool("lottarmor:helmet_dwarf", {
 	description = minetest.colorize("Gray", "Dwarven Helm") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
 	inventory_image = "lottarmor_inv_helmet_dwarf.png",
-	groups = {armor_head=15, armor_heal=0, armor_healing=0, physics_speed=0, immortal=1},
+	groups = {armor_head=8, armor_heal=0, armor_healing=0, physics_speed=0, immortal=1},
 	wear = 0,
 })
 
@@ -42,7 +42,7 @@ minetest.register_tool("lottarmor:boots_ranger", {
 	description = minetest.colorize("Brown", "Worn Ranger Boots") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
 	inventory_image = "lottarmor_inv_boots_ranger.png",
-	groups = {armor_feet=10, armor_heal=0, armor_healing=0, physics_speed=0, immortal=1},
+	groups = {armor_feet=5, armor_heal=0, armor_healing=0, physics_speed=0, immortal=1},
 	wear = 0,
 })
 
@@ -297,31 +297,58 @@ minetest.register_tool("lottarmor:boots_galvorn", {
 minetest.register_tool("lottarmor:helmet_mithril", {
 	description = "Mithril Helmet",
 	inventory_image = "lottarmor_inv_helmet_mithril.png",
-	groups = {armor_head=8, armor_heal=0, armor_use=50, armor_healing=0, physics_speed=0.02},
+	groups = {armor_head=8, armor_heal=0, armor_use=50, armor_healing=0, physics_speed=0.02, forbidden=1},
 	wear = 0,
 })
 
 minetest.register_tool("lottarmor:chestplate_mithril", {
 	description = "Mithril Chestplate",
 	inventory_image = "lottarmor_inv_chestplate_mithril.png",
-	groups = {armor_torso=10, armor_heal=0, armor_use=50, armor_healing=0, physics_speed=-0.02},
+	groups = {armor_torso=10, armor_heal=0, armor_use=50, armor_healing=0, physics_speed=-0.02, forbidden=1},
 	wear = 0,
 })
 
 minetest.register_tool("lottarmor:leggings_mithril", {
 	description = "Mithril Leggings",
 	inventory_image = "lottarmor_inv_leggings_mithril.png",
-	groups = {armor_legs=10, armor_heal=0, armor_use=50, armor_healing=0, physics_speed=-0.02},
+	groups = {armor_legs=10, armor_heal=0, armor_use=50, armor_healing=0, physics_speed=-0.02, forbidden=1},
 	wear = 0,
 })
 
 minetest.register_tool("lottarmor:boots_mithril", {
 	description = "Mithril Boots",
 	inventory_image = "lottarmor_inv_boots_mithril.png",
-	groups = {armor_feet=7, armor_heal=0, armor_use=50, armor_healing=0, physics_speed=-0.02},
+	groups = {armor_feet=7, armor_heal=0, armor_use=50, armor_healing=0, physics_speed=-0.02, forbidden=1},
 	wear = 0,
 })
 
+minetest.register_tool("lottarmor:helmet_thorium", {
+	description = "Thorium Helmet",
+	inventory_image = "lottarmor_inv_helmet_thorium.png",
+	groups = {armor_head=11, armor_heal=0, armor_use=50, armor_healing=0, physics_speed=0.02, forbidden=1},
+	wear = 0,
+})
+
+minetest.register_tool("lottarmor:chestplate_thorium", {
+	description = "Thorium Chestplate",
+	inventory_image = "lottarmor_inv_chestplate_thorium.png",
+	groups = {armor_torso=15, armor_heal=0, armor_use=50, armor_healing=0, physics_speed=-0.02, forbidden=1},
+	wear = 0,
+})
+
+minetest.register_tool("lottarmor:leggings_thorium", {
+	description = "Thorium Leggings",
+	inventory_image = "lottarmor_inv_leggings_thorium.png",
+	groups = {armor_legs=15, armor_heal=0, armor_use=50, armor_healing=0, physics_speed=-0.02, forbidden=1},
+	wear = 0,
+})
+
+minetest.register_tool("lottarmor:boots_thorium", {
+	description = "Thorium Boots",
+	inventory_image = "lottarmor_inv_boots_thorium.png",
+	groups = {armor_feet=11, armor_heal=0, armor_use=50, armor_healing=0, physics_speed=-0.02, forbidden=1},
+	wear = 0,
+})
 -- Register Craft Recipes
 
 local craft_ingreds = {
@@ -334,6 +361,7 @@ local craft_ingreds = {
 	gold = "default:gold_ingot",
 	galvorn = "lottores:galvorn_ingot",
 	mithril = "lottores:mithril_ingot",
+	thorium = "lottores:thorium_ingot",
 }
 
 for k, v in pairs(craft_ingreds) do

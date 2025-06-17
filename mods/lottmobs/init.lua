@@ -959,7 +959,7 @@ mobs:register_spawn("lottmobs:raiding_orc", {"lottmapgen:gondor_grass"}, 2, -1, 
 
 
 -- Because orcs live underground, right?
-mobs:register_spawn("lottmobs:raiding_orc", {"default:stone"}, 20, -1, 20000, 2, -40)
+mobs:register_spawn("lottmobs:raiding_orc", {"default:stone"}, 20, -1, 2000, 2, -40)
 
 
 mobs:register_mob("lottmobs:uruk_hai", {
@@ -1086,7 +1086,7 @@ lottmobs.register_guard_craftitem("lottmobs:uruk_hai", "Uruk Hai Guard", "lottmo
 
 
 -- Because orcs live underground, right?
-mobs:register_spawn("lottmobs:uruk_hai", {"default:stone"}, 20, -1, 20000, 2, -40)
+mobs:register_spawn("lottmobs:uruk_hai", {"default:stone"}, 20, -1, 400, 2, -40)
 
 
 mobs:register_mob("lottmobs:battle_troll", {
@@ -1546,7 +1546,7 @@ mobs:register_mob("lottmobs:balrog", {
 	step = 1,
 	on_die = lottmobs.guard_die,
 })
-mobs:register_spawn("lottmobs:balrog", {"default:stone"}, 20, -1, 60000, 2, -4000)
+mobs:register_spawn("lottmobs:balrog", {"default:stone"}, 20, -1, 400000, 2, -4000)
 
 
 

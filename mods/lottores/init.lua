@@ -55,6 +55,15 @@ minetest.register_node("lottores:mithril_ore", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
+minetest.register_node("lottores:thorium_ore", {
+	description = "Thorium Ore",
+	tiles = {"default_stone.png^lottores_thorium_ore.png"},
+	is_ground_content = true,
+	groups = {cracky=1},
+	drop = "lottores:thorium_lump",
+	sounds = default.node_sound_stone_defaults(),
+})
+
 minetest.register_node("lottores:orc_ore", {
 	description = "Ore Iron Ore",
 	tiles = {"lottmapgen_mordor_stone.png^default_mineral_iron.png^[colorize:#00000055"},
@@ -149,6 +158,16 @@ minetest.register_craftitem("lottores:mithril_ingot", {
 	inventory_image = "lottores_mithril_ingot.png",
 })
 
+minetest.register_craftitem("lottores:thorium_lump", {
+	description = "Thorium Lump",
+	inventory_image = "lottores_thorium_lump.png",
+})
+
+minetest.register_craftitem("lottores:thorium_ingot", {
+	description = "Thorium Ingot",
+	inventory_image = "lottores_thorium_ingot.png",
+})
+
 minetest.register_craftitem("lottores:galvorn_ingot", {
 	description = "Galvorn Ingot",
 	inventory_image = "lottores_galvorn_ingot.png",
@@ -220,6 +239,14 @@ minetest.register_node("lottores:lead_block", {
 minetest.register_node("lottores:mithril_block", {
 	description = "Mithril Block",
 	tiles = {"lottores_mithril_block.png"},
+	is_ground_content = true,
+	groups = {cracky=1,level=2},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("lottores:thorium_block", {
+	description = "Thorium Block",
+	tiles = {"lottores_thorium_block.png"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),

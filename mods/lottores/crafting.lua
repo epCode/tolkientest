@@ -109,6 +109,29 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	type = "cooking",
+	output = "lottores:thorium_ingot",
+	recipe = "lottores:thorium_lump",
+	time = 100,
+})
+
+minetest.register_craft({
+	output = 'lottores:thorium_block',
+	recipe = {
+		{'lottores:thorium_ingot', 'lottores:thorium_ingot', 'lottores:thorium_ingot'},
+		{'lottores:thorium_ingot', 'lottores:thorium_ingot', 'lottores:thorium_ingot'},
+		{'lottores:thorium_ingot', 'lottores:thorium_ingot', 'lottores:thorium_ingot'},
+	}
+})
+
+minetest.register_craft({
+	output = 'lottores:thorium_ingot 9',
+	recipe = {
+		{'lottores:thorium_block'},
+	}
+})
+
+minetest.register_craft({
 	output = 'lottores:galvorn_block',
 	recipe = {
 		{'lottores:galvorn_ingot', 'lottores:galvorn_ingot', 'lottores:galvorn_ingot'},
@@ -212,6 +235,7 @@ local materials = {
 	{"gold", "default:gold_ingot"},
 	{"galvorn", "lottores:galvorn_ingot"},
 	{"mithril", "lottores:mithril_ingot"},
+	{"thorium", "lottores:thorium_ingot"},
 }
 
 for i in ipairs(materials) do

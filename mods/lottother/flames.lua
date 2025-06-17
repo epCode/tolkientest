@@ -38,7 +38,7 @@ local blue_fire_node = {
 	buildable_to = true,
 	sunlight_propagates = true,
 	floodable = true,
-	damage_per_second = 6,
+	damage_per_second = 10,
 	groups = {igniter = 2, fire = 1},
 	drop = "",
 	--on_flood = flood_flame
@@ -86,7 +86,7 @@ local red_fire_node = {
 	buildable_to = true,
 	sunlight_propagates = true,
 	floodable = true,
-	damage_per_second = 6,
+	damage_per_second = 10,
 	groups = {igniter = 2, fire = 1},
 	drop = "",
 	--on_flood = flood_flame

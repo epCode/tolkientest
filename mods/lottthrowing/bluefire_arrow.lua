@@ -70,7 +70,7 @@ THROWING_ARROW_ENTITY.on_step = function(self, dtime)
 	end
 
 	if self.lastpos.x ~= nil then
-		
+
 			if node.name ~= "air" and node.name ~= "lottthrowing:light" then
 				if minetest.get_node(self.lastpos).name == "air"
 				or minetest.get_node(self.lastpos).name == "lottthrowing:light"
@@ -78,24 +78,24 @@ THROWING_ARROW_ENTITY.on_step = function(self, dtime)
 					minetest.set_node(self.lastpos, {name="lottother:blue_flame"})
 					self.object:remove()
 				end
-				
-				if math.floor(self.lastpos.x+0.5) ~= math.floor(pos.x+0.5) 
-				or math.floor(self.lastpos.y+0.5) ~= math.floor(pos.y+0.5) 
-				or math.floor(self.lastpos.z+0.5) ~= math.floor(pos.z+0.5) 
+
+				if math.floor(self.lastpos.x+0.5) ~= math.floor(pos.x+0.5)
+				or math.floor(self.lastpos.y+0.5) ~= math.floor(pos.y+0.5)
+				or math.floor(self.lastpos.z+0.5) ~= math.floor(pos.z+0.5)
 				then
-				
+
 					if minetest.get_node(self.lastpos).name == "lottthrowing:light" then
 						minetest.remove_node(self.lastpos)
 					end
-					
+
 					if minetest.get_node(pos).name == "air" then
 						minetest.set_node(pos, {name="lottthrowing:light"})
 					end
-					
+
 				end
 			end
 		end
-		
+
 		self.lastpos={x=pos.x, y=pos.y, z=pos.z}
 end
 

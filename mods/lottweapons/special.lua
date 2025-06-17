@@ -29,9 +29,9 @@ minetest.register_tool("lottweapons:balrog_whip", {
 		minetest.get_background_escape_sequence("darkred"),
 	inventory_image = "lottweapons_balrog_whip.png^[transform3",
 	on_use = function(itemstack, user, pointed_thing)
-		
+
 		local player = user:get_player_name()
-		
+
 		if pointed_thing.type == "nothing" and mana.subtract(player, 30) then
 			local dir = user:get_look_dir()
 			local pos = user:get_pos()
@@ -79,10 +79,10 @@ minetest.register_tool("lottweapons:balrog_whip", {
 					end
 				end)
 			end
-			--if not minetest.setting_getbool("creative_mode") then
-				--itemstack:add_wear(65535/499)
-				--return itemstack
-			--end
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:add_wear(65535/499)
+				return itemstack
+			end
 		elseif pointed_thing.type == "node" and mana.subtract(player, 30) then
 			local pos = user:get_pos()
 			local radius = 4

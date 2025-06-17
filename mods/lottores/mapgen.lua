@@ -143,3 +143,25 @@ minetest.register_ore({
 	y_min     = wl - 31000,
 	y_max     = wl - 20000,
 })
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "lottores:thorium_ore",
+	wherein        = "default:stone",
+	clust_scarcity = 50*50*50,
+	clust_num_ores = 3,
+	clust_size     = 5,
+	y_min     = wl - 31000,
+	y_max     = wl - 8000,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "lottores:thorium_ore",
+	wherein        = "default:stone",
+	clust_scarcity = 400*400*400,
+	clust_num_ores = 7,
+	clust_size     = 3,
+	y_min     = wl - 31000,
+	y_max     = wl - 8000,
+})

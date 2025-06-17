@@ -530,9 +530,14 @@ minetest.register_tool("lottthrowing:bow_elvish", {
 		local name = user:get_player_name()
 		if mana.subtract(name, 30) then
 			lottthrowing_shoot_blue_arrow(item, user, "lottthrowing:arrow_fire_blue", 2)
+				if not minetest.setting_getbool("creative_mode") then
+					itemstack:add_wear(65535/1500)
+				end
 		end
+		return itemstack
 	end,
 })
+
 
 minetest.register_craft({
 	output = 'lottthrowing:bow_elvish',
