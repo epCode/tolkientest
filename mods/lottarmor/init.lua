@@ -12,6 +12,12 @@ dofile(minetest.get_modpath(minetest.get_current_modname()).."/wieldview.lua")
 
 
 
+minetest.register_craftitem("lottarmor:placeholder", {
+	description = "you shouldn't be seeing this...",
+	inventory_image = "blank.png",
+	range = 0,
+})
+
 minetest.register_tool("lottarmor:leggings_dwarf", {
 	description = minetest.colorize("Gray", "Dwarven Leggings") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
@@ -19,7 +25,6 @@ minetest.register_tool("lottarmor:leggings_dwarf", {
 	groups = {armor_legs=10, armor_heal=0, armor_healing=0, physics_speed=0, immortal=1},
 	wear = 0,
 })
-
 
 minetest.register_tool("lottarmor:boots_dwarf", {
 	description = minetest.colorize("Gray", "Dwarven Boots") ..

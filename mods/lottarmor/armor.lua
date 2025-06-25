@@ -93,7 +93,7 @@ armor = {
 		.."image[3,3;1,1;lottarmor_shoes.png]"
 		.."image[4,0;1,1;lottarmor_cloak.png]"
 		.."list[detached:player_name_armor;armor;0,0;1,4;]"
-		.."list[detached:player_name_armor;armor;2,2;1,1;4]"
+		--.."list[detached:player_name_armor;armor;2,2;1,1;4]"
 		.."list[detached:player_name_clothing;clothing;3,0;1,4;]"
 		.."list[detached:player_name_clothing;clothing;4,0;1,1;4]"
 		.."image[1,7.5;1,1;ad_a_sword.png]"
@@ -103,11 +103,11 @@ armor = {
 		.."image[5,7.5;1,1;ad_a_light.png]"
 		.."image[6,7.5;1,1;ad_a_food.png]"
 		.."list[detached:player_name_armor;armor;1,7.5;6,1;5]"
-		.."image_button[2,3;1,1;ad_sound.png;toggle_sound;]"
+		.."image_button[7,7.5;1,1;ad_sound.png;toggle_sound;]"
 		.."image[1.16,0.25;2,4;armor_preview]"
-		.."image[2,2;1,1;lottarmor_shield.png]"
-		.."list[current_player;main;0,4.25;8,1;]"
-		.."list[current_player;main;0,5.5;8,3;8]"
+		--.."image[2,2;1,1;lottarmor_shield.png]"
+		.."list[current_player;main;0,4.25;8,1;6]"
+		.."list[current_player;main;0,5.5;8,3;14]"
 		.."image[5.05,0;3.5,1;lottarmor_crafting.png]"
 		.."list[current_player;craft;4,1;3,3;]"
 		.."list[current_player;craftpreview;7,2;1,1;]"
@@ -783,9 +783,9 @@ minetest.register_on_joinplayer(function(player)
 	multiskin:init(player)
 	local name = player:get_player_name()
 	local player_inv = player:get_inventory()
-	player_inv:set_size("main", 16)
-	player:hud_set_hotbar_itemcount(1)
-	player:hud_set_flags({hotbar = false})
+	player_inv:set_size("main", 22)
+	player:hud_set_hotbar_itemcount(6)
+	--player:hud_set_flags({hotbar = false})
 	local armor_inv = minetest.create_detached_inventory(name.."_armor", {
 		on_put = function(inv, listname, index, stack, player)
 			player:get_inventory():set_stack(listname, index, stack)
@@ -808,75 +808,91 @@ minetest.register_on_joinplayer(function(player)
 			armor:update_inventory(player)
 		end,
 		allow_put = function(inv, listname, index, stack, player)
+			local pinv = player:get_inventory()
+			local tk = stack:get_tool_capabilities()
 			if index == 1 then
 				if stack:get_definition().groups.armor_head == nil then
 					return 0
 				else
+					pinv:set_stack("main", index-5, stack)
 					return 1
 				end
 			elseif index == 2 then
 				if stack:get_definition().groups.armor_torso == nil then
 					return 0
 				else
+					pinv:set_stack("main", index-5, stack)
 					return 1
 				end
 			elseif index == 3 then
 				if stack:get_definition().groups.armor_legs == nil then
 					return 0
 				else
+					pinv:set_stack("main", index-5, stack)
 					return 1
 				end
 			elseif index == 4 then
 				if stack:get_definition().groups.armor_feet == nil then
 					return 0
 				else
+					pinv:set_stack("main", index-5, stack)
 					return 1
 				end
 			elseif index == 5 then
 				if stack:get_definition().groups.armor_shield == nil then
 					return 0
 				else
+					pinv:set_stack("main", index-5, stack)
 					return 1
 				end
 			elseif index == 6 then
-				if stack:get_definition().groups.armor_weapon == nil then
+				if stack:get_definition().groups.armor_weapon == nil and tk.damage_groups.fleshy == nil then
 					return 0
 				else
+					pinv:set_stack("main", index-5, stack)
 					return 1
 				end
 			elseif index == 7 then
 				if stack:get_definition().groups.armor_shield == nil then
 					return 0
 				else
+					pinv:set_stack("main", index-5, stack)
 					return 1
 				end
 			elseif index == 8 then
 				if stack:get_definition().groups.armor_ring == nil then
 					return 0
 				else
+					pinv:set_stack("main", index-5, stack)
 					return 1
 				end
 			elseif index == 9 then
 				if stack:get_definition().groups.armor_ring == nil then
 					return 0
 				else
+					pinv:set_stack("main", index-5, stack)
 					return 1
 				end
 			elseif index == 10 then
 				if stack:get_definition().groups.armor_light == nil then
 					return 0
 				else
+					pinv:set_stack("main", index-5, stack)
 					return 1
 				end
 			elseif index == 11 then
 				if stack:get_definition().groups.armor_food == nil then
 					return 0
 				else
+					pinv:set_stack("main", index-5, stack)
 					return 1
 				end
 			end
 		end,
 		allow_take = function(inv, listname, index, stack, player)
+			local pinv = player:get_inventory()
+			
+			pinv:set_stack("main", index-5, "lottarmor:placeholder")
 			return stack:get_count()
 		end,
 		allow_move = function(inv, from_list, from_index, to_list, to_index, count, player)
@@ -891,6 +907,13 @@ minetest.register_on_joinplayer(function(player)
 	for i = 1, 11 do
 		local stack = player_inv:get_stack("armor", i)
 		armor_inv:set_stack("armor", i, stack)
+	end
+	for i = 1, 6 do
+		local stack = player_inv:get_stack("armor", i+5)
+		print(core.serialize(stack:get_name()))
+		if stack:get_name() == "" then
+			player_inv:set_stack("main", i, ItemStack("lottarmor:placeholder"))
+		end
 	end
 
 	--Bags

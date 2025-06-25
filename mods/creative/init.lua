@@ -88,7 +88,7 @@ creative.set_creative_formspec = function(player)
 		"listcolors[#606060AA;#606060;#141318;#30434C;#FFF]"  ..
 		"background[5,5;1,1;gui_formbg.png;true]" ..
 		"tabheader[-0.12,-0.12;creative_tabs;Main,Creative;2;true;false]" ..
-		"list[current_player;main;0,0;8,4;]" ..
+		"list[current_player;main;0,0;8,4;6]" ..
 		"image[8.5,2;1,1;lottarmor_trash.png]" ..
 		"list[detached:creative_trash;main;8.5,2;1,1;]" ..
 		"list[detached:creative_" .. name .. ";main;0,5;10,4;" ..
