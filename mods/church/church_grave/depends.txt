@@ -1,5 +1,0 @@
-default
-stairs
-church_cross
-display_lib
-font_lib

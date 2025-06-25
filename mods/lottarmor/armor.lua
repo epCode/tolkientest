@@ -102,7 +102,8 @@ armor = {
 		.."image[4,7.5;1,1;ad_ring.png]"
 		.."image[5,7.5;1,1;ad_a_light.png]"
 		.."image[6,7.5;1,1;ad_a_food.png]"
-		.."list[detached:player_name_armor;armor;1,7.5;6,1;5]"
+		.."list[detached:player_name_armor;armor;1,7.5;5,1;5]"
+		.."list[current_player;main;6,7.5;1,1;5]"
 		.."image_button[7,7.5;1,1;ad_sound.png;toggle_sound;]"
 		.."image[1.16,0.25;2,4;armor_preview]"
 		--.."image[2,2;1,1;lottarmor_shield.png]"
@@ -256,7 +257,7 @@ armor.set_player_armor = function(self, player)
 	
 	
 	
-	for i = 1, 11 do
+	for i = 1, 10 do
 		
 		local stack = player_inv:get_stack("armor", i)
 		local item = stack:get_name()
@@ -636,7 +637,7 @@ armor.update_armor = function(self, player)
 		local heal_max = 0
 		local state = 0
 		local items = 0
-		for i = 1, 11 do
+		for i = 1, 10 do
 			local stack = player_inv:get_stack("armor", i)
 			if stack:get_count() > 0 then
 				local clothes = stack:get_definition().groups["clothes"] or 0
@@ -880,19 +881,12 @@ minetest.register_on_joinplayer(function(player)
 					pinv:set_stack("main", index-5, stack)
 					return 1
 				end
-			elseif index == 11 then
-				if stack:get_definition().groups.armor_food == nil then
-					return 0
-				else
-					pinv:set_stack("main", index-5, stack)
-					return 1
-				end
 			end
 		end,
 		allow_take = function(inv, listname, index, stack, player)
 			local pinv = player:get_inventory()
 			
-			pinv:set_stack("main", index-5, "lottarmor:placeholder")
+			--pinv:set_stack("main", index-5, "lottarmor:placeholder")
 			return stack:get_count()
 		end,
 		allow_move = function(inv, from_list, from_index, to_list, to_index, count, player)
@@ -902,15 +896,14 @@ minetest.register_on_joinplayer(function(player)
 	if inv_mod == "inventory_plus" then
 		inventory_plus.register_button(player,"armor", "Armor")
 	end
-	armor_inv:set_size("armor", 11)
-	player_inv:set_size("armor", 11)
-	for i = 1, 11 do
+	armor_inv:set_size("armor", 10)
+	player_inv:set_size("armor", 10)
+	for i = 1, 10 do
 		local stack = player_inv:get_stack("armor", i)
 		armor_inv:set_stack("armor", i, stack)
 	end
-	for i = 1, 6 do
+	for i = 1, 5 do
 		local stack = player_inv:get_stack("armor", i+5)
-		print(core.serialize(stack:get_name()))
 		if stack:get_name() == "" then
 			player_inv:set_stack("main", i, ItemStack("lottarmor:placeholder"))
 		end
