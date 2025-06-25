@@ -1,6 +1,6 @@
 -- Totally tweaked for forked version (like many mods in here), do not use out of this subgame!
 
-local wielding_only = false
+local wielding_only = true
 
 local players = {}
 
@@ -12,6 +12,7 @@ end)
 minetest.register_on_leaveplayer(function(mt_player)
 	local name = mt_player:get_player_name()
 	local pinfo=players[name]
+	pinfo.wielded = pinfo.wielding
 	if pinfo.wielding > 0 then
 		pinfo.wielding = 0
 		update_light_player(pinfo)
@@ -22,12 +23,14 @@ end)
 --wielding_light returns 0 for no light; 1 for regular light.  Outside of this function we don't care what's being wielded, carried or worn, just what needs to be done.
 function wielding_light(pinfo)
 	
+	
 	local name = pinfo.mt_player:get_player_name()
 	
 	if (wielding_only) then
 		local wielded_item = pinfo.mt_player:get_wielded_item():get_name()
-		if wielded_item == "default:torch" then
-			return 1
+		local def = minetest.registered_items[wielded_item]
+		if def and def.light_source and def.light_source > 0 then
+			return (def.real_light_source or def.light_source) + 2 --+ lottarmor.get_upgrades(pinfo.mt_player).light
 		end
 	else
         --[[
@@ -71,33 +74,107 @@ function wielding_light(pinfo)
 	return 0
 end
 
+-- large light resolution
+local LLR = 50
+
+lightaddvectors = {}
+
+--[[
+local lightaddvectors = {
+	vector.new(1,0,0),
+	vector.new(1,1,0),
+	vector.new(1,0,1),
+	vector.new(1,1,1),
+	vector.new(0,1,0),
+	vector.new(0,1,1),
+	vector.new(0,0,1),
+	vector.new(-1,0,0),
+	vector.new(-1,-1,0),
+	vector.new(-1,0,-1),
+	vector.new(-1,-1,-1),
+	vector.new(0,-1,0),
+	vector.new(0,-1,-1),
+	vector.new(0,0,-1),
+	vector.new(1,-1,0),
+	vector.new(-1,1,0),
+	vector.new(1,0,-1),
+	vector.new(-1,0,1),
+	vector.new(1,1,-1),
+	vector.new(1,-1,1),
+	vector.new(-1,1,1),
+	vector.new(1,-1,-1),
+	vector.new(-1,-1,1),
+	vector.new(-1,1,-1),
+	vector.new(0,-1,1),
+	vector.new(0,1,-1),
+}]]
+
+local ro = 0
+local lastv
+for li = 1, LLR do
+	ro = ro + math.rad(math.random(100))
+	local dir = core.yaw_to_dir(ro)
+	dir.y = li/LLR
+	lightaddvectors[li] = vector.normalize(dir)
+end
+
+local function phash(pos)
+	return (pos.x%64)*4096 + (pos.y%64)*64 + pos.z%64
+end
+
 function update_light_player(pinfo)
 	local removes = {}
 	local adds = {}
+	local old_used_poss = {}
 	if pinfo.wielded > 0 then
 		local pos=pinfo.old_pos
-		local hash = (pos.x%64)*4096 + (pos.y%64)*64 + pos.z%64
+		local hash = phash(pos)
+		if pinfo.wielded > 16 then
+			local w = pinfo.wielded
+			for i=1, w do
+				for _,vec in pairs(lightaddvectors) do
+					local lp = vector.add(pos, vector.multiply(vec, (i-16)))
+					removes[phash(lp)] = lp
+				end
+			end
+		end
 		removes[hash] = pos
 	end
 	
+	local used_poss = {}
 	if pinfo.wielding > 0 then
 		local pos=pinfo.pos
-		local hash = (pos.x%64)*4096 + (pos.y%64)*64 + pos.z%64
+		local hash = phash(pos)
 		removes[hash] = nil
+		if pinfo.wielding > 16 then
+			local w = pinfo.wielding
+			for i=1, w do
+				for _,vec in pairs(lightaddvectors) do
+					local lp = vector.add(pos, vector.multiply(vec, (i-16)))
+					adds[phash(lp)] = lp
+				end
+			end
+		end
 		adds[hash] = pos
 	end
 	
-	for h,p in pairs(adds) do
-		local node = minetest.get_node_or_nil(p)
-		if node == nil or (node ~= nil and node.name == "air") then
-			minetest.env:set_node(p, {type="node",name="walking_light:light"})
-		end
-	end
 
 	for h,p in pairs(removes) do
 		local node = minetest.get_node_or_nil(p)
-		if node ~= nil and node.name == "walking_light:light" then
+		if node ~= nil and string.find(node.name, "walking_light:light_") then
 			minetest.env:set_node(p, {type="node",name="air"})
+		end
+	end
+	for h,p in pairs(adds) do
+		local node = minetest.get_node_or_nil(p)
+		if node == nil or (node ~= nil and node.name == "air") or (string.find(node.name, "walking_light:light_") and node.name ~= "walking_light:light_"..math.min(pinfo.wielding, 16)) then
+			if pinfo.wielding > 16 then
+				local dist = (vector.distance(pinfo.pos, p)/pinfo.wielding)+1
+				local LL = math.round(math.max(1, pinfo.wielding/dist*(16/pinfo.wielding)))
+				minetest.env:set_node(p, {type="node",name="walking_light:light_"..LL})
+			else
+				minetest.env:set_node(p, {type="node",name="walking_light:light_"..pinfo.wielding})
+			end
 		end
 	end
 end
@@ -128,25 +205,30 @@ end
 
 minetest.register_globalstep(update_light_all)
 
-minetest.register_node("walking_light:light", {
-	drawtype = "airlike",
-	tile_images = {"walking_light.png"},
-	inventory_image = minetest.inventorycube("walking_light.png"),
-	paramtype = "light",
-	walkable = false,
-	is_ground_content = true,
-	--light_propagates = true,
-	--sunlight_propagates = true,
-	light_source = 14,
-	selection_box = {
-		type = "fixed",
-		fixed = {0, 0, 0, 0, 0, 0},
-	},
-	node_box = {
-		type = "fixed",
-		fixed = {0, 0, 0, 0, 0, 0},
-	},
-})
+for i=1, 16 do
+	minetest.register_node("walking_light:light_"..i, {
+		--drawtype = "glasslike", -- for vis
+		--tiles = {"ad_walking_light.png"}, -- for fix
+		drawtype = "airlike",
+		tile_images = {"ad_walking_light.png"},
+		inventory_image = minetest.inventorycube("walking_light.png"),
+		paramtype = "light",
+		use_texture_alpha = "blend",
+		walkable = false,
+		is_ground_content = true,
+		--light_propagates = true,
+		--sunlight_propagates = true,
+		light_source = i,
+		selection_box = {
+			type = "fixed",
+			fixed = {0, 0, 0, 0, 0, 0},
+		},
+		node_box = {
+			type = "fixed",
+			fixed = {0, 0, 0, 0, 0, 0},
+		},
+	})
+end
 
 
 

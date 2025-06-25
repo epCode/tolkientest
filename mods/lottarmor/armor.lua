@@ -1,5 +1,7 @@
 -- Global Defaults - use armor.conf to override these
 
+lottarmor = {}
+
 ARMOR_INIT_DELAY = 1
 ARMOR_INIT_TIMES = 1
 ARMOR_BONES_DELAY = 1
@@ -31,6 +33,20 @@ ARMOR_FIRE_NODES = {
 	
 	{"default:torch",           1, 1},
 }
+
+
+
+
+
+
+
+function lottarmor.get_upgrades(player)
+	local upgrades = {light = 0, damage = 0, aff = 0, affs = {}, eff = {}}
+	return upgrades
+end
+
+
+
 
 -- Load Armor Configs
 
@@ -80,6 +96,14 @@ armor = {
 		.."list[detached:player_name_armor;armor;2,2;1,1;4]"
 		.."list[detached:player_name_clothing;clothing;3,0;1,4;]"
 		.."list[detached:player_name_clothing;clothing;4,0;1,1;4]"
+		.."image[1,7.5;1,1;ad_a_sword.png]"
+		.."image[2,7.5;1,1;ad_a_shield.png]"
+		.."image[3,7.5;1,1;ad_ring.png]"
+		.."image[4,7.5;1,1;ad_ring.png]"
+		.."image[5,7.5;1,1;ad_a_light.png]"
+		.."image[6,7.5;1,1;ad_a_food.png]"
+		.."list[detached:player_name_armor;armor;1,7.5;6,1;5]"
+		.."image_button[2,3;1,1;ad_sound.png;toggle_sound;]"
 		.."image[1.16,0.25;2,4;armor_preview]"
 		.."image[2,2;1,1;lottarmor_shield.png]"
 		.."list[current_player;main;0,4.25;8,1;]"
@@ -232,7 +256,7 @@ armor.set_player_armor = function(self, player)
 	
 	
 	
-	for i = 1, 7 do
+	for i = 1, 11 do
 		
 		local stack = player_inv:get_stack("armor", i)
 		local item = stack:get_name()
@@ -612,7 +636,7 @@ armor.update_armor = function(self, player)
 		local heal_max = 0
 		local state = 0
 		local items = 0
-		for i = 1, 7 do
+		for i = 1, 11 do
 			local stack = player_inv:get_stack("armor", i)
 			if stack:get_count() > 0 then
 				local clothes = stack:get_definition().groups["clothes"] or 0
@@ -759,6 +783,9 @@ minetest.register_on_joinplayer(function(player)
 	multiskin:init(player)
 	local name = player:get_player_name()
 	local player_inv = player:get_inventory()
+	player_inv:set_size("main", 16)
+	player:hud_set_hotbar_itemcount(1)
+	player:hud_set_flags({hotbar = false})
 	local armor_inv = minetest.create_detached_inventory(name.."_armor", {
 		on_put = function(inv, listname, index, stack, player)
 			player:get_inventory():set_stack(listname, index, stack)
@@ -812,13 +839,37 @@ minetest.register_on_joinplayer(function(player)
 					return 1
 				end
 			elseif index == 6 then
-				if stack:get_definition().groups.armor_ring == nil then
+				if stack:get_definition().groups.armor_weapon == nil then
 					return 0
 				else
 					return 1
 				end
 			elseif index == 7 then
+				if stack:get_definition().groups.armor_shield == nil then
+					return 0
+				else
+					return 1
+				end
+			elseif index == 8 then
 				if stack:get_definition().groups.armor_ring == nil then
+					return 0
+				else
+					return 1
+				end
+			elseif index == 9 then
+				if stack:get_definition().groups.armor_ring == nil then
+					return 0
+				else
+					return 1
+				end
+			elseif index == 10 then
+				if stack:get_definition().groups.armor_light == nil then
+					return 0
+				else
+					return 1
+				end
+			elseif index == 11 then
+				if stack:get_definition().groups.armor_food == nil then
 					return 0
 				else
 					return 1
@@ -835,9 +886,9 @@ minetest.register_on_joinplayer(function(player)
 	if inv_mod == "inventory_plus" then
 		inventory_plus.register_button(player,"armor", "Armor")
 	end
-	armor_inv:set_size("armor", 7)
-	player_inv:set_size("armor", 7)
-	for i = 1, 7 do
+	armor_inv:set_size("armor", 11)
+	player_inv:set_size("armor", 11)
+	for i = 1, 11 do
 		local stack = player_inv:get_stack("armor", i)
 		armor_inv:set_stack("armor", i, stack)
 	end

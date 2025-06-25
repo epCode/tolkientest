@@ -9,6 +9,10 @@ local function on_flood(pos, oldnode, newnode)
 	return false
 end
 
+
+
+
+
 minetest.register_node("default:torch", {
 	description = "Torch",
 	drawtype = "mesh",
@@ -24,7 +28,7 @@ minetest.register_node("default:torch", {
 	sunlight_propagates = true,
 	walkable = false,
 	liquids_pointable = false,
-	light_source = 12,
+	light_source = 5,
 	groups = {choppy=2, dig_immediate=3, flammable=1, attached_node=1, torch=1},
 	drop = "default:torch",
 	selection_box = {
@@ -72,7 +76,7 @@ minetest.register_node("default:torch_wall", {
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
 	walkable = false,
-	light_source = 12,
+	light_source = 5,
 	groups = {choppy=2, dig_immediate=3, flammable=1, not_in_creative_inventory=1, attached_node=1, torch=1},
 	drop = "default:torch",
 	selection_box = {

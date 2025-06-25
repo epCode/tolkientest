@@ -26,7 +26,8 @@ minetest.register_node("lottblocks:elf_torch", {
 	sunlight_propagates = true,
 	walkable = false,
 	liquids_pointable = false,
-	light_source = 12,
+	light_source = 16,
+	real_light_source = 30,
 	groups = {choppy=2, dig_immediate=3, flammable=1, attached_node=1, torch=1},
 	drop = "lottblocks:elf_torch",
 	selection_box = {
@@ -74,7 +75,7 @@ minetest.register_node("lottblocks:elf_torch_wall", {
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
 	walkable = false,
-	light_source = 12,
+	light_source = 5,
 	groups = {choppy=2, dig_immediate=3, flammable=1, not_in_creative_inventory=1, attached_node=1, torch=1},
 	drop = "lottblocks:elf_torch",
 	selection_box = {
@@ -100,7 +101,7 @@ minetest.register_lbm({
 })
 
 minetest.register_craft({
-	output = 'lottblocks:elf_torch 2',
+	output = 'lottblocks:elf_torch 1',
 	recipe = {
 		{'lottores:rough_rock_lump'},
 		{'group:stick'},
@@ -128,7 +129,7 @@ minetest.register_node("lottblocks:orc_torch", {
 	sunlight_propagates = true,
 	walkable = false,
 	liquids_pointable = false,
-	light_source = 12,
+	light_source = 5,
 	groups = {choppy=2, dig_immediate=3, flammable=1, attached_node=1, torch=1},
 	drop = "lottblocks:orc_torch",
 	selection_box = {
@@ -176,7 +177,7 @@ minetest.register_node("lottblocks:orc_torch_wall", {
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
 	walkable = false,
-	light_source = 12,
+	light_source = 5,
 	groups = {choppy=2, dig_immediate=3, flammable=1, not_in_creative_inventory=1, attached_node=1, torch=1},
 	drop = "lottblocks:orc_torch",
 	selection_box = {
@@ -202,7 +203,7 @@ minetest.register_lbm({
 })
 
 minetest.register_craft({
-	output = 'lottblocks:orc_torch 2',
+	output = 'lottblocks:orc_torch 1',
 	recipe = {
 		{'bones:bone'},
 		{'group:stick'},

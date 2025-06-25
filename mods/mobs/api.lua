@@ -96,6 +96,7 @@ local mob_class = {
 	visual_size = {x = 1, y = 1},
 	texture_mods = "",
 	dogshoot_stop = true,
+	class_drops = {},
 	makes_footstep_sound = false,
 	view_range = 15,
 	_acceleration = 1,
@@ -811,9 +812,24 @@ function mob_class:update_tag()
 	})
 end
 
+function mob_class:drop_class()
+	local items = {}
+	if not self.class_drops then return items end
+	
+	for listname,pred in pairs(self.class_drops) do
+		if math.random(pred.chance) == 1 then
+			local drop = pred.l[math.random(#pred.l)]
+			items[drop[1]] = math.random(drop[2])
+		end
+	end
+	
+	
+	return items
+end
 
 -- drop items
 function mob_class:item_drop()
+	
 
 	-- no drops if disabled by setting or mob is child
 	if not mobs_drop_items or self.child then return end
@@ -835,6 +851,14 @@ function mob_class:item_drop()
 		and self.cause_of_death.puncher:is_player() or nil
 
 	local obj, item, num
+
+
+	local dc = self:drop_class()
+
+	for name,amount in pairs(dc) do
+		table.insert(self.drops, {name = name, chance = 1, min = amount, max = amount,})
+	end
+	self.class_drops = {}
 
 	for n = 1, #self.drops do
 
@@ -900,6 +924,7 @@ end
 -- check if mob is dead or only hurt
 function mob_class:check_for_death(cmi_cause)
 
+
 	-- has health actually changed?
 	if self.health == self.old_health and self.health > 0 then
 		return false
@@ -942,7 +967,10 @@ function mob_class:check_for_death(cmi_cause)
 	self.cause_of_death = cmi_cause
 
 	-- drop items
-	self:item_drop()
+	if not self._items_dropped then
+		self._items_dropped = true
+		self:item_drop()
+	end
 
 	self:mob_sound(self.sounds.death)
 
@@ -3793,6 +3821,7 @@ minetest.register_entity(name, setmetatable({
 	mesh = def.mesh,
 	makes_footstep_sound = def.makes_footstep_sound,
 	view_range = def.view_range,
+	class_drops = def.class_drops or {},
 	walk_velocity = def.walk_velocity,
 	run_velocity = def.run_velocity,
 	damage = max(0, (def.damage or 0) * difficulty),

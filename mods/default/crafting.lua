@@ -39,7 +39,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:torch 4',
+	output = 'default:torch 1',
 	recipe = {
 		{'default:coal_lump'},
 		{'group:stick'},
