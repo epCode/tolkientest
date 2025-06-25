@@ -14,7 +14,7 @@ dofile(minetest.get_modpath(minetest.get_current_modname()).."/wieldview.lua")
 
 minetest.register_craftitem("lottarmor:placeholder", {
 	description = "you shouldn't be seeing this...",
-	inventory_image = "grass.png",
+	inventory_image = "blank.png",
 	noitem = true,
 })
 

@@ -27,7 +27,7 @@ function wielding_light(pinfo)
 	local name = pinfo.mt_player:get_player_name()
 	
 	if (wielding_only) then
-		local wielded_item = pinfo.mt_player:get_wielded_item():get_name()
+		local wielded_item = pinfo.mt_player:get_inventory():get_stack("armor", 10):get_name()
 		local def = minetest.registered_items[wielded_item]
 		if def and def.light_source and def.light_source > 0 then
 			return (def.real_light_source or def.light_source) + 2 --+ lottarmor.get_upgrades(pinfo.mt_player).light

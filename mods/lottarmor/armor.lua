@@ -875,7 +875,7 @@ minetest.register_on_joinplayer(function(player)
 					return 1
 				end
 			elseif index == 10 then
-				if stack:get_definition().groups.armor_light == nil then
+				if stack:get_definition().groups.light_source == nil then
 					return 0
 				else
 					pinv:set_stack("main", index-5, stack)
