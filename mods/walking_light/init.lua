@@ -214,6 +214,7 @@ for i=1, 16 do
 		tile_images = {"ad_walking_light.png"},
 		inventory_image = minetest.inventorycube("walking_light.png"),
 		paramtype = "light",
+		sunlight_propagates = true,
 		use_texture_alpha = "blend",
 		walkable = false,
 		is_ground_content = true,

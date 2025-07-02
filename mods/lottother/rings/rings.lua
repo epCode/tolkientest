@@ -139,7 +139,7 @@ minetest.register_tool("lottother:narya", {
 	description = minetest.colorize("crimson", "Narya\nElven Ring of Armor and Light") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
 	inventory_image = "lottother_narya_inv.png",
-	groups = {armor_torso=80, forbidden=1, immortal=1},
+	groups = {armor_ring=80, forbidden=1, immortal=1},
 	wear = 0,
 })
 
@@ -153,7 +153,7 @@ minetest.register_tool("lottother:nenya", {
 	description = minetest.colorize("silver", "Nenya\nElven Ring of Long Life and Health") ..
 		minetest.get_background_escape_sequence("lightgoldenrodyellow"),
 	inventory_image = "lottother_nenya_inv.png",
-	groups = {forbidden=1, armor_heal=10, armor_shield=20, immortal=1},
+	groups = {forbidden=1, armor_heal=10, armor_ring=1, immortal=1},
 	wear = 0,
 })
 
