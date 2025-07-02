@@ -125,11 +125,49 @@ minetest.register_on_dieplayer(function(player)
 	if minetest.setting_getbool("creative_mode") then
 		return
 	end
+	
+	
 
+	local name = player:get_player_name()
 	local pos = player:getpos()
 	pos.x = math.floor(pos.x+0.5)
 	pos.y = math.floor(pos.y+0.5)
 	pos.z = math.floor(pos.z+0.5)
+	
+	local realbaginv = core.get_inventory({type="detached", name = name.."_bags"})
+	local baginv = player:get_inventory()
+	
+	local dropped_items = {}
+	
+	for i_=1, 4 do
+		local listname = "bag"..i_.."contents"
+		for i=1, baginv:get_size(listname) do
+			local it = baginv:get_stack(listname, i)
+			if not it:is_empty() then
+				table.insert(dropped_items, {stack=it,listname=listname, index = i})
+			end
+		end
+		--table.insert(dropped_items, {stack=realbaginv:get_stack("bag"..i_, 1),listname="bag"..i_, index = 1})
+		--table.insert(dropped_items, {stack=baginv:get_stack("bag"..i_, 1),listname="bag"..i_, index = 1})
+	end
+	
+	for _,def in pairs(dropped_items) do
+		local item = def.stack
+		local it = core.add_item(pos, item:to_string())
+		if it then
+			it:add_velocity(vector.new(
+				math.random(-100,100)/85,
+				math.random(0,100)/42.5,
+				math.random(-100,100)/85
+			))
+			if string.find(def.listname, "contents") then
+				baginv:set_stack(def.listname, def.index, ItemStack(""))
+			else
+				realbaginv:set_stack(def.listname, def.index, ItemStack(""))
+			end
+		end
+	end
+	
 	local param2 = minetest.dir_to_facedir(player:get_look_dir())
 
 	local nn = minetest.get_node(pos).name

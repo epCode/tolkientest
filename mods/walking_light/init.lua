@@ -171,7 +171,8 @@ function update_light_player(pinfo)
 		if node == nil or (node ~= nil and node.name == "air") or (string.find(node.name, "walking_light:light_") and node.name ~= "walking_light:light_"..math.min(pinfo.wielding, 16)) then
 			if pinfo.wielding > 16 then
 				local dist = (vector.distance(pinfo.pos, p)/pinfo.wielding)+1
-				local LL = math.round(math.max(1, pinfo.wielding/dist*(16/pinfo.wielding)))
+				local fadeFactor = 2 -- Adjust this value to control the fade-off rate
+				local LL = math.round(math.max(1, pinfo.wielding / (dist ^ fadeFactor) * (16 / pinfo.wielding)))
 				minetest.env:set_node(p, {type="node",name="walking_light:light_"..LL})
 			else
 				minetest.env:set_node(p, {type="node",name="walking_light:light_"..pinfo.wielding})
