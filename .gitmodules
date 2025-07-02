@@ -1,0 +1,3 @@
+[submodule "mods/lottadditions"]
+	path = mods/lottadditions
+	url = git@github.com:epCode/lottadditions.git
