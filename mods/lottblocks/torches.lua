@@ -28,7 +28,7 @@ minetest.register_node("lottblocks:elf_torch", {
 	liquids_pointable = false,
 	light_source = 16,
 	real_light_source = 30,
-	groups = {choppy=2, dig_immediate=3, flammable=1, attached_node=1, torch=1},
+	groups = {choppy=2, dig_immediate=3, flammable=1, attached_node=1, torch=1, light_source = 1},
 	drop = "lottblocks:elf_torch",
 	selection_box = {
 		type = "wallmounted",
@@ -76,7 +76,7 @@ minetest.register_node("lottblocks:elf_torch_wall", {
 	sunlight_propagates = true,
 	walkable = false,
 	light_source = 5,
-	groups = {choppy=2, dig_immediate=3, flammable=1, not_in_creative_inventory=1, attached_node=1, torch=1},
+	groups = {choppy=2, dig_immediate=3, flammable=1, not_in_creative_inventory=1, attached_node=1, torch=1, light_source = 1},
 	drop = "lottblocks:elf_torch",
 	selection_box = {
 		type = "wallmounted",
@@ -130,7 +130,7 @@ minetest.register_node("lottblocks:orc_torch", {
 	walkable = false,
 	liquids_pointable = false,
 	light_source = 5,
-	groups = {choppy=2, dig_immediate=3, flammable=1, attached_node=1, torch=1},
+	groups = {choppy=2, dig_immediate=3, flammable=1, attached_node=1, torch=1, light_source = 1},
 	drop = "lottblocks:orc_torch",
 	selection_box = {
 		type = "wallmounted",
@@ -178,7 +178,7 @@ minetest.register_node("lottblocks:orc_torch_wall", {
 	sunlight_propagates = true,
 	walkable = false,
 	light_source = 5,
-	groups = {choppy=2, dig_immediate=3, flammable=1, not_in_creative_inventory=1, attached_node=1, torch=1},
+	groups = {choppy=2, dig_immediate=3, flammable=1, not_in_creative_inventory=1, attached_node=1, torch=1, light_source = 1},
 	drop = "lottblocks:orc_torch",
 	selection_box = {
 		type = "wallmounted",

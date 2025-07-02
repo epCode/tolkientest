@@ -151,6 +151,7 @@ function update_light_player(pinfo)
 			for i=1, w do
 				for _,vec in pairs(lightaddvectors) do
 					local lp = vector.add(pos, vector.multiply(vec, (i-16)))
+
 					adds[phash(lp)] = lp
 				end
 			end
