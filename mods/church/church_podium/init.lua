@@ -1,5 +1,5 @@
 
-screwdriver = screwdriver or {}
+screwdriver = {}
 
 local podiums = {}
 

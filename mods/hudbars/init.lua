@@ -241,6 +241,8 @@ function hb.register_hudbar(identifier, text_color, label, textures, default_sta
 			direction = 0,
 			size = bar_size,
 			z_index = 1,
+			size = {x=2, y=16.5},
+			
 		})
 		if hb.settings.bar_type == "progress_bar" then
 			ids.text = player:hud_add({
@@ -252,6 +254,7 @@ function hb.register_hudbar(identifier, text_color, label, textures, default_sta
 				direction = 0,
 				offset = { x = offset.x + 2,  y = offset.y - 1},
 				z_index = 2,
+				
 		})
 		end
 		-- Do not forget to update hb.get_hudbar_state if you add new fields to the state table

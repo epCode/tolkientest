@@ -26,7 +26,7 @@ minetest.register_node("lottblocks:elf_torch", {
 	sunlight_propagates = true,
 	walkable = false,
 	liquids_pointable = false,
-	light_source = 16,
+	light_source = 14,
 	real_light_source = 30,
 	groups = {choppy=2, dig_immediate=3, flammable=1, attached_node=1, torch=1, light_source = 1},
 	drop = "lottblocks:elf_torch",
