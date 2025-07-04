@@ -190,7 +190,7 @@ function update_light_all(dtime)
 			pinfo.old_pos = pinfo.pos
 			pinfo.pos = {
 				x=math.floor(pos.x + 0.5),
-				y=math.floor(pos.y + 2.5),
+				y=math.floor(pos.y + 1.5),
 				z=math.floor(pos.z + 0.5)}
 			pinfo.pos_changed=(
 				pinfo.old_pos.x ~= pinfo.pos.x or
