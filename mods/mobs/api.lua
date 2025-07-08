@@ -854,18 +854,19 @@ function mob_class:item_drop()
 
 
 	local dc = self:drop_class()
-
+	local alldrops = table.copy(self.drops)
 	for name,amount in pairs(dc) do
-		table.insert(self.drops, {name = name, chance = 1, min = amount, max = amount,})
+		table.insert(alldrops, {name = name, chance = 1, min = amount, max = amount,})
 	end
 	self.class_drops = {}
+	
 
-	for n = 1, #self.drops do
+	for n = 1, #alldrops do
 
-		if random(self.drops[n].chance) == 1 then
+		if random(alldrops[n].chance) == 1 then
 
-			num = random(self.drops[n].min or 0, self.drops[n].max or 1)
-			item = self.drops[n].name
+			num = random(alldrops[n].min or 0, alldrops[n].max or 1)
+			item = alldrops[n].name
 
 			-- cook items on a hot death
 			if self.cause_of_death.hot then
@@ -882,7 +883,7 @@ function mob_class:item_drop()
 			if death_by_player then
 				obj = minetest.add_item(pos, ItemStack(item .. " " .. num))
 
-			elseif self.drops[n].min ~= 0 then
+			elseif alldrops[n].min ~= 0 then
 				obj = minetest.add_item(pos, ItemStack(item .. " " .. num))
 			end
 
