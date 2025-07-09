@@ -14,7 +14,7 @@ minetest.register_node("default:stone", {
 
 minetest.register_node("default:desert_stone", {
     description = "Desert Stone",
-    tiles = {"default_desert_stone.png"},
+    tiles = {{name="default_desert_stone.png",align_style="world",scale=8}},
     is_ground_content = true,
     groups = {cracky=3, stone=1},
     drop = 'default:desert_cobble',
@@ -147,7 +147,7 @@ minetest.register_node("default:dirt_with_snow", {
 
 minetest.register_node("default:dirt", {
 	description = "Dirt",
-	tiles = {"default_dirt.png"},
+	tiles = {{name = "default_dirt_8.png", tileable_vertical = false, align_style = "world", scale=8}},
 	is_ground_content = true,
 	groups = {crumbly=3,soil=1},
 	sounds = default.node_sound_dirt_defaults(),

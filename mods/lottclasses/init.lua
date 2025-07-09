@@ -39,7 +39,6 @@ dofile(minetest.get_modpath("lottclasses").."/allies.lua")
 
 local bg_size = 0.5
 local race_chooser = "size[15,15]"..
-	--"style_type[background;noclip=true]"..
 	"background[-500,-500;1000,1000;lottclasses_background_b.png]"..
 	"background["..(-75*bg_size)..","..(-6.2*bg_size)..";"..(192*bg_size)..","..(29*bg_size)..";lottclasses_background.png]"..
 	"tablecolumns[color;text]"..

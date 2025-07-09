@@ -184,6 +184,8 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	local c_pilinehtar = minetest.get_content_id("lottplants:pilinehtar")
 	local c_ithilgrass = minetest.get_content_id("lottmapgen:ithilien_grass")
 	local c_melon = minetest.get_content_id("lottplants:melon_wild")
+	local c_dirttostone = minetest.get_content_id("lottmapgen:dirt_to_stone")
+	local c_dirtoodesertstone = minetest.get_content_id("lottmapgen:dirt_to_desertstone")
 
 	local sidelen = x1 - x0 + 1
 	local chulens = {x=sidelen, y=sidelen, z=sidelen}
@@ -554,7 +556,13 @@ minetest.register_on_generated(function(minp, maxp, seed)
 								end
 							elseif y > sandy and y >= surfy - 2 then
 								if biome ~= 8 then
-									data[vi] = c_dirt
+									if biome ~= 4 and biome ~= 12 and y == surfy - 2 then
+										data[vi] = c_dirttostone
+									elseif y == surfy - 2 then
+										data[vi] = c_dirtoodesertstone
+									else
+										data[vi] = c_dirt
+									end
 								end
 							end
 						end

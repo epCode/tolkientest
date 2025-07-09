@@ -27,6 +27,26 @@ minetest.register_node("lottmapgen:angsnowblock", {
 	}),
 })
 
+
+minetest.register_node("lottmapgen:dirt_to_stone", {
+	description = "",
+	tiles = {{name="default_dirt_to_granite.png",align_style="world",scale=8}},
+	is_ground_content = true,
+	drop = 'default:stone',
+	is_ground_content = true,
+	groups = {cracky=3, stone=1},
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_node("lottmapgen:dirt_to_desertstone", {
+	description = "",
+	tiles = {{name="default_dirt_to_desertstone.png",align_style="world",scale=8}},
+	is_ground_content = true,
+	drop = 'default:stone',
+	is_ground_content = true,
+	groups = {cracky=3, stone=1},
+	sounds = default.node_sound_stone_defaults(),
+})
+
 minetest.register_node("lottmapgen:frozen_stone", {
 	description = "Frozen Stone",
 	tiles = {"default_stone.png^lottmapgen_frozen.png"},
