@@ -218,6 +218,7 @@ for i=1, 16 do
 		sunlight_propagates = true,
 		use_texture_alpha = "blend",
 		walkable = false,
+		buildable_to = true,
 		is_ground_content = true,
 		--light_propagates = true,
 		--sunlight_propagates = true,
