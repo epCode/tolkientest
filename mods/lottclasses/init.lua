@@ -37,8 +37,11 @@ minetest.register_privilege("GAMEhobbit", {
 dofile(minetest.get_modpath("lottclasses").."/change-privs.lua")
 dofile(minetest.get_modpath("lottclasses").."/allies.lua")
 
-local race_chooser = "size[8,6]"..
-	"background[8,6;1,1;gui_formbg.png;true]"..
+local bg_size = 0.5
+local race_chooser = "size[15,15]"..
+	--"style_type[background;noclip=true]"..
+	"background[-500,-500;1000,1000;lottclasses_background_b.png]"..
+	"background["..(-75*bg_size)..","..(-6.2*bg_size)..";"..(192*bg_size)..","..(29*bg_size)..";lottclasses_background.png]"..
 	"tablecolumns[color;text]"..
 	"tableoptions[background=#00000000;highlight=#00000000;border=false]"..
 	"table[0,0;6,0.5;race_message;#A52A2A,Please select the race you wish to be:;1]"..
@@ -371,6 +374,8 @@ minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name()
 	local privs = minetest.get_player_privs(name)
 	
+
+	
 	
 	if minetest.get_player_privs(name).GAMEwizard then
 		multiskin[name].skin = "wizard_skin.png"
@@ -403,7 +408,8 @@ minetest.register_on_joinplayer(function(player)
 			multiskin[name].skin = "hobbit_skinf.png"
 		end
 	else
-		minetest.after(1, function()
+
+		minetest.after(0.1, function()
 			if minetest.is_singleplayer() then
 				minetest.show_formspec(name, "race_selector", race_chooser .. fly_stuff)
 			else
