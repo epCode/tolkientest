@@ -11,7 +11,9 @@ minetest.register_node("lottores:rough_rock", {
 
 minetest.register_node("lottores:silver_ore", {
 	description = "Silver Ore",
-	tiles = {"default_stone.png^lottores_silver_ore.png"},
+	tiles = {
+		{name="default_granite_8.png^lottores_silver_ore_8.png", align_style="world", scale=8}
+	},
 	is_ground_content = true,
 	groups = {cracky=2},
 	drop = 'lottores:silver_lump',
@@ -20,7 +22,9 @@ minetest.register_node("lottores:silver_ore", {
 
 minetest.register_node("lottores:tin_ore", {
 	description = "Tin Ore",
-	tiles = {"default_stone.png^lottores_tin_ore.png"},
+	tiles = {
+		{name="default_granite_8.png^lottores_tin_ore_8.png", align_style="world", scale=8}
+	},
 	is_ground_content = true,
 	groups = {cracky=3},
 	drop = "lottores:tin_lump",
@@ -39,7 +43,9 @@ minetest.register_alias("lottores:limestone_lump", "lottores:limestone")
 
 minetest.register_node("lottores:lead_ore", {
 	description = "Lead Ore",
-	tiles = {"default_stone.png^lottores_lead_ore.png"},
+	tiles = {
+		{name="default_granite_8.png^lottores_lead_ore_8.png", align_style="world", scale=8}
+	},
 	is_ground_content = true,
 	groups = {cracky=2},
 	drop = "lottores:lead_lump",
@@ -48,7 +54,9 @@ minetest.register_node("lottores:lead_ore", {
 
 minetest.register_node("lottores:mithril_ore", {
 	description = "Mithril Ore",
-	tiles = {"default_stone.png^lottores_mithril_ore.png"},
+	tiles = {
+		{name="default_granite_8.png^lottores_mithril_ore_8.png", align_style="world", scale=8}
+	},
 	is_ground_content = true,
 	groups = {cracky=1},
 	drop = "lottores:mithril_lump",
@@ -57,7 +65,9 @@ minetest.register_node("lottores:mithril_ore", {
 
 minetest.register_node("lottores:thorium_ore", {
 	description = "Thorium Ore",
-	tiles = {"default_stone.png^lottores_thorium_ore.png"},
+	tiles = {
+		{name="default_granite_8.png^lottores_thorium_ore_8.png", align_style="world", scale=8}
+	},
 	is_ground_content = true,
 	groups = {cracky=1},
 	drop = "lottores:thorium_lump",

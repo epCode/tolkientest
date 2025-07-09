@@ -160,12 +160,6 @@ function update_light_player(pinfo)
 	end
 	
 
-	for h,p in pairs(removes) do
-		local node = minetest.get_node_or_nil(p)
-		if node ~= nil and string.find(node.name, "walking_light:light_") then
-			minetest.env:set_node(p, {type="node",name="air"})
-		end
-	end
 	for h,p in pairs(adds) do
 		local node = minetest.get_node_or_nil(p)
 		if node == nil or (node ~= nil and node.name == "air") or (string.find(node.name, "walking_light:light_") and node.name ~= "walking_light:light_"..math.min(pinfo.wielding, 16)) then
@@ -177,6 +171,12 @@ function update_light_player(pinfo)
 			else
 				minetest.env:set_node(p, {type="node",name="walking_light:light_"..pinfo.wielding})
 			end
+		end
+	end
+	for h,p in pairs(removes) do
+		local node = minetest.get_node_or_nil(p)
+		if node ~= nil and string.find(node.name, "walking_light:light_") then
+			minetest.env:set_node(p, {type="node",name="air"})
 		end
 	end
 end

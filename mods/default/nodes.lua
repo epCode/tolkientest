@@ -2,7 +2,9 @@
 
 minetest.register_node("default:stone", {
 	description = "Stone",
-	tiles = {"default_stone.png"},
+	tiles = {
+    {name="default_granite_8.png", align_style="world", scale=8}
+  },
 	is_ground_content = true,
 	groups = {cracky=3, stone=1},
 	drop = 'default:cobble',
@@ -22,7 +24,9 @@ minetest.register_node("default:desert_stone", {
 
 minetest.register_node("default:stone_with_coal", {
 	description = "Coal Ore",
-	tiles = {"default_stone.png^default_mineral_coal.png"},
+	tiles = {
+    {name="default_granite_8.png^default_mineral_coal_8.png", align_style="world", scale=8}
+  },
 	is_ground_content = true,
 	groups = {cracky=3, stone=1},
 	drop = 'default:coal_lump',
@@ -31,7 +35,9 @@ minetest.register_node("default:stone_with_coal", {
 
 minetest.register_node("default:stone_with_iron", {
 	description = "Iron Ore",
-	tiles = {"default_stone.png^default_mineral_iron.png"},
+	tiles = {
+		{name="default_granite_8.png^default_mineral_iron_8.png", align_style="world", scale=8}
+	},
 	is_ground_content = true,
 	groups = {cracky=2, stone=1},
 	drop = 'default:iron_lump',
@@ -40,7 +46,9 @@ minetest.register_node("default:stone_with_iron", {
 
 minetest.register_node("default:stone_with_copper", {
 	description = "Copper Ore",
-	tiles = {"default_stone.png^default_mineral_copper.png"},
+	tiles = {
+		{name="default_granite_8.png^default_mineral_copper_8.png", align_style="world", scale=8}
+	},
 	is_ground_content = true,
 	groups = {cracky=2},
 	drop = 'default:copper_lump',
@@ -49,7 +57,9 @@ minetest.register_node("default:stone_with_copper", {
 
 minetest.register_node("default:stone_with_mese", {
 	description = "Mese Ore",
-	tiles = {"default_stone.png^default_mineral_mese.png"},
+	tiles = {
+		{name="default_granite_8.png^default_mineral_mese_8.png", align_style="world", scale=8}
+	},
 	is_ground_content = true,
 	groups = {cracky=1},
 	drop = "default:mese_crystal",
@@ -58,7 +68,9 @@ minetest.register_node("default:stone_with_mese", {
 
 minetest.register_node("default:stone_with_gold", {
 	description = "Gold Ore",
-	tiles = {"default_stone.png^default_mineral_gold.png"},
+	tiles = {
+		{name="default_granite_8.png^default_mineral_gold_8.png", align_style="world", scale=8}
+	},
 	is_ground_content = true,
 	groups = {cracky=2},
 	drop = "default:gold_lump",
