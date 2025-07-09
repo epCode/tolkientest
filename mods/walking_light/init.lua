@@ -122,18 +122,23 @@ local function phash(pos)
 	return (pos.x%64)*4096 + (pos.y%64)*64 + pos.z%64
 end
 
-function update_light_player(pinfo)
+function update_light_player(pinfo, force)
+	local flicker = math.random(0,1)-1
+	local wielding = pinfo.wielding
+	if wielding < 15 then
+		wielding = wielding + flicker
+	end
 	local removes = {}
 	local adds = {}
 	local old_used_poss = {}
 	if pinfo.wielded > 0 then
 		local pos=pinfo.old_pos
 		local hash = phash(pos)
-		if pinfo.wielded > 16 then
+		if pinfo.wielded > 14 then
 			local w = pinfo.wielded
 			for i=1, w do
 				for _,vec in pairs(lightaddvectors) do
-					local lp = vector.add(pos, vector.multiply(vec, (i-16)))
+					local lp = vector.add(pos, vector.multiply(vec, (i-14)))
 					removes[phash(lp)] = lp
 				end
 			end
@@ -142,15 +147,15 @@ function update_light_player(pinfo)
 	end
 	
 	local used_poss = {}
-	if pinfo.wielding > 0 then
+	if wielding > 0 then
 		local pos=pinfo.pos
 		local hash = phash(pos)
 		removes[hash] = nil
-		if pinfo.wielding > 16 then
-			local w = pinfo.wielding
+		if wielding > 14 then
+			local w = wielding
 			for i=1, w do
 				for _,vec in pairs(lightaddvectors) do
-					local lp = vector.add(pos, vector.multiply(vec, (i-16)))
+					local lp = vector.add(pos, vector.multiply(vec, (i-14)))
 
 					adds[phash(lp)] = lp
 				end
@@ -162,14 +167,14 @@ function update_light_player(pinfo)
 
 	for h,p in pairs(adds) do
 		local node = minetest.get_node_or_nil(p)
-		if node == nil or (node ~= nil and node.name == "air") or (string.find(node.name, "walking_light:light_") and node.name ~= "walking_light:light_"..math.min(pinfo.wielding, 16)) then
-			if pinfo.wielding > 16 then
-				local dist = (vector.distance(pinfo.pos, p)/pinfo.wielding)+1
+		if node == nil or (node ~= nil and node.name == "air") or (string.find(node.name, "walking_light:light_") and node.name ~= "walking_light:light_"..math.min(wielding, 14)) then
+			if wielding > 14 then
+				local dist = (vector.distance(pinfo.pos, p)/wielding)+1
 				local fadeFactor = 2 -- Adjust this value to control the fade-off rate
-				local LL = math.round(math.max(1, pinfo.wielding / (dist ^ fadeFactor) * (16 / pinfo.wielding)))
+				local LL = math.round(math.max(1, wielding / (dist ^ fadeFactor) * (14 / wielding)))
 				minetest.env:set_node(p, {type="node",name="walking_light:light_"..LL})
 			else
-				minetest.env:set_node(p, {type="node",name="walking_light:light_"..pinfo.wielding})
+				minetest.env:set_node(p, {type="node",name="walking_light:light_"..wielding})
 			end
 		end
 	end
@@ -181,7 +186,10 @@ function update_light_player(pinfo)
 	end
 end
 
+local timer = 0
+
 function update_light_all(dtime)
+	timer = timer - dtime
 	for name,pinfo in pairs(players) do
 		local pos = pinfo.mt_player:get_pos()
 		pinfo.wielded = pinfo.wielding
@@ -199,15 +207,18 @@ function update_light_all(dtime)
 		end
 		players[pinfo.name] = pinfo
 
-		if pinfo.pos_changed or (pinfo.wielded ~= pinfo.wielding) then
-			update_light_player(pinfo)
+		if pinfo.pos_changed or (pinfo.wielded ~= pinfo.wielding) or timer < 0 then
+			if timer < 0 and pinfo.wielding < 15 or timer > 0 then
+				update_light_player(pinfo)
+			end
+			timer = 0.5
 		end
 	end
 end
 
 minetest.register_globalstep(update_light_all)
 
-for i=1, 16 do
+for i=1, 14 do
 	minetest.register_node("walking_light:light_"..i, {
 		--drawtype = "glasslike", -- for vis
 		--tiles = {"ad_walking_light.png"}, -- for fix
