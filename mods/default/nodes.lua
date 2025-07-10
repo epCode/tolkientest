@@ -202,7 +202,7 @@ minetest.register_node("default:gravel", {
 
 minetest.register_node("default:sand", {
 	description = "Sand",
-	tiles = {"default_sand.png"},
+	tiles = {{name="default_sand_8.png",align_style="world",scale=8}},
 	is_ground_content = true,
 	groups = {crumbly=3, falling_node=1, sand=1},
 	sounds = default.node_sound_sand_defaults(),
