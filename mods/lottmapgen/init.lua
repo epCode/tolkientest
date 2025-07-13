@@ -186,6 +186,9 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	local c_melon = minetest.get_content_id("lottplants:melon_wild")
 	local c_dirttostone_1 = minetest.get_content_id("lottmapgen:dirt_to_stone_1")
 	local c_dirttostone_2 = minetest.get_content_id("lottmapgen:dirt_to_stone_2")
+	local c_dirttostone_2_lr = minetest.get_content_id("lottmapgen:dirt_to_stone_2_lr")
+	local c_dirttostone_2_r = minetest.get_content_id("lottmapgen:dirt_to_stone_2_r")
+	local c_dirttostone_2_l = minetest.get_content_id("lottmapgen:dirt_to_stone_2_l")
 	local c_dirtoodesertstone = minetest.get_content_id("lottmapgen:dirt_to_desertstone")
 
 	local sidelen = x1 - x0 + 1
@@ -558,9 +561,51 @@ minetest.register_on_generated(function(minp, maxp, seed)
 							elseif y > sandy and y >= surfy - 2 then
 								if biome ~= 8 then
 									if biome ~= 4 and biome ~= 12 and (y == surfy - 2 or y == surfy - 1) then
+										local vd = area:index(x, y-1, z)
+										local vl, vr, vf, vb = area:index(x-1, y, z), area:index(x+1, y, z), area:index(x, y, z+1), area:index(x, y, z-1)
+										local left, right, foward, back
 										if y == surfy - 1 then
-											data[vi] = c_dirttostone_1
+											if data[vl] and (data[vl] == c_dirttostone_2 or data[vl] == c_dirttostone_2_r or data[vl] == c_dirttostone_2_l) then left = "stone" end
+											if data[vr] and (data[vr] == c_dirttostone_2 or data[vr] == c_dirttostone_2_r or data[vr] == c_dirttostone_2_l) then right = "stone" end
+											if data[vf] and (data[vf] == c_dirttostone_2 or data[vf] == c_dirttostone_2_r or data[vf] == c_dirttostone_2_l) then foward = "stone" end
+											if data[vb] and (data[vb] == c_dirttostone_2 or data[vb] == c_dirttostone_2_r or data[vb] == c_dirttostone_2_l) then back = "stone" end
+											if left then
+												data[vl] = c_dirttostone_2_r
+											end
+											if right then
+												data[vr] = c_dirttostone_2_l
+											end
+											if foward then
+												data[vf] = c_dirttostone_2_l
+											end
+											if back then
+												data[vb] = c_dirttostone_2_r
+											end
+												
+											if data[vd] == c_dirttostone_2_lr or data[vd] == c_dirttostone_2_r or data[vd] == c_dirttostone_2_l then
+												data[vi] = c_dirt
+											else
+												data[vi] = c_dirttostone_1
+											end
 										else
+											local vp = area:index(x, y+1, z)
+											if data[vl] and (data[vl] == c_dirttostone_1 or data[vl] == c_dirt) then left = "dirt" end
+											if data[vr] and (data[vr] == c_dirttostone_1 or data[vl] == c_dirt) then right = "dirt" end
+											if data[vf] and (data[vf] == c_dirttostone_1 or data[vl] == c_dirt) then foward = "dirt" end
+											if data[vb] and (data[vb] == c_dirttostone_1 or data[vl] == c_dirt) then back = "dirt" end
+											if left and right or foward and back then
+												data[vi] = c_dirttostone_2_lr
+												data[vp] = c_dirt
+											elseif left or back then
+												data[vi] = c_dirttostone_2_l
+												data[vp] = c_dirt
+											elseif right or foward then
+												data[vi] = c_dirttostone_2_r
+												data[vp] = c_dirt
+											else
+												data[vi] = c_dirttostone_2
+											end
+
 											data[vi] = c_dirttostone_2
 										end
 									elseif y == surfy - 2 then

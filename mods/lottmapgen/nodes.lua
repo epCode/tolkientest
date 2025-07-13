@@ -44,6 +44,39 @@ minetest.register_node("lottmapgen:dirt_to_stone_1", {
 	groups = {crumbly=3, dirt=1},
 	sounds = default.node_sound_dirt_defaults(),
 })
+minetest.register_node("lottmapgen:dirt_to_stone_1_r", {
+	description = "",
+	tiles = {
+		{name="default_dirt_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_1.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_1.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_1.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_1.png", align_style="world", scale=8},
+	},
+	is_ground_content = true,
+	drop = 'default:dirt',
+	is_ground_content = true,
+	groups = {crumbly=3, dirt=1},
+	sounds = default.node_sound_dirt_defaults(),
+})
+minetest.register_node("lottmapgen:dirt_to_stone_1_l", {
+	description = "",
+	tiles = {
+		{name="default_dirt_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_1.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_1.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_1.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_1.png", align_style="world", scale=8},
+	},
+	is_ground_content = true,
+	drop = 'default:dirt',
+	is_ground_content = true,
+	groups = {crumbly=3, dirt=1},
+	sounds = default.node_sound_dirt_defaults(),
+})
+
 minetest.register_node("lottmapgen:dirt_to_stone_2", {
 	description = "",
 	tiles = {
@@ -53,6 +86,54 @@ minetest.register_node("lottmapgen:dirt_to_stone_2", {
 		{name="default_granite_8.png^lottmapgen_dirtlayer_2.png", align_style="world", scale=8},
 		{name="default_granite_8.png^lottmapgen_dirtlayer_2.png", align_style="world", scale=8},
 		{name="default_granite_8.png^lottmapgen_dirtlayer_2.png", align_style="world", scale=8},
+	},
+	is_ground_content = true,
+	drop = 'default:stone',
+	is_ground_content = true,
+	groups = {cracky=3, stone=1},
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_node("lottmapgen:dirt_to_stone_2_r", {
+	description = "",
+	tiles = {
+		{name="default_dirt_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2_r.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2_l.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2_l.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2_r.png", align_style="world", scale=8},
+	},
+	is_ground_content = true,
+	drop = 'default:stone',
+	is_ground_content = true,
+	groups = {cracky=3, stone=1},
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_node("lottmapgen:dirt_to_stone_2_l", {
+	description = "",
+	tiles = {
+		{name="default_dirt_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2_l.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2_r.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2_r.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2_l.png", align_style="world", scale=8},
+	},
+	is_ground_content = true,
+	drop = 'default:stone',
+	is_ground_content = true,
+	groups = {cracky=3, stone=1},
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_node("lottmapgen:dirt_to_stone_2_lr", {
+	description = "",
+	tiles = {
+		{name="default_dirt_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2_lr.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2_lr.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2_lr.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2_lr.png", align_style="world", scale=8},
 	},
 	is_ground_content = true,
 	drop = 'default:stone',
