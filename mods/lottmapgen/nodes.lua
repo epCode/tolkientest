@@ -28,9 +28,32 @@ minetest.register_node("lottmapgen:angsnowblock", {
 })
 
 
-minetest.register_node("lottmapgen:dirt_to_stone", {
+minetest.register_node("lottmapgen:dirt_to_stone_1", {
 	description = "",
-	tiles = {{name="default_dirt_to_granite.png",align_style="world",scale=8}},
+	tiles = {
+		{name="default_dirt_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_1.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_1.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_1.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_1.png", align_style="world", scale=8},
+	},
+	is_ground_content = true,
+	drop = 'default:dirt',
+	is_ground_content = true,
+	groups = {crumbly=3, dirt=1},
+	sounds = default.node_sound_dirt_defaults(),
+})
+minetest.register_node("lottmapgen:dirt_to_stone_2", {
+	description = "",
+	tiles = {
+		{name="default_dirt_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2.png", align_style="world", scale=8},
+		{name="default_granite_8.png^lottmapgen_dirtlayer_2.png", align_style="world", scale=8},
+	},
 	is_ground_content = true,
 	drop = 'default:stone',
 	is_ground_content = true,

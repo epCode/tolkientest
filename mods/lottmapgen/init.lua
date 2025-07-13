@@ -61,7 +61,7 @@ local PLANT15 = 500000
 local np_temp = {
 	offset = 0,
 	scale = 1,
-	spread = {x=512, y=512, z=512},
+	spread = {x=512*4, y=512*4, z=512*4},
 	seed = 9130,
 	octaves = 3,
 	persist = 0.5
@@ -72,7 +72,7 @@ local np_temp = {
 local np_humid = {
 	offset = 0,
 	scale = 1,
-	spread = {x=512, y=512, z=512},
+	spread = {x=512*4, y=512*4, z=512*4},
 	seed = -5500,
 	octaves = 3,
 	persist = 0.5
@@ -81,7 +81,7 @@ local np_humid = {
 local np_random = {
 	offset = 0,
 	scale = 1,
-	spread = {x=512, y=512, z=512},
+	spread = {x=512*4, y=512*4, z=512*4},
 	seed = 4510,
 	octaves = 3,
 	persist = 0.5
@@ -184,7 +184,8 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	local c_pilinehtar = minetest.get_content_id("lottplants:pilinehtar")
 	local c_ithilgrass = minetest.get_content_id("lottmapgen:ithilien_grass")
 	local c_melon = minetest.get_content_id("lottplants:melon_wild")
-	local c_dirttostone = minetest.get_content_id("lottmapgen:dirt_to_stone")
+	local c_dirttostone_1 = minetest.get_content_id("lottmapgen:dirt_to_stone_1")
+	local c_dirttostone_2 = minetest.get_content_id("lottmapgen:dirt_to_stone_2")
 	local c_dirtoodesertstone = minetest.get_content_id("lottmapgen:dirt_to_desertstone")
 
 	local sidelen = x1 - x0 + 1
@@ -556,8 +557,12 @@ minetest.register_on_generated(function(minp, maxp, seed)
 								end
 							elseif y > sandy and y >= surfy - 2 then
 								if biome ~= 8 then
-									if biome ~= 4 and biome ~= 12 and y == surfy - 2 then
-										data[vi] = c_dirttostone
+									if biome ~= 4 and biome ~= 12 and (y == surfy - 2 or y == surfy - 1) then
+										if y == surfy - 1 then
+											data[vi] = c_dirttostone_1
+										else
+											data[vi] = c_dirttostone_2
+										end
 									elseif y == surfy - 2 then
 										data[vi] = c_dirtoodesertstone
 									else
