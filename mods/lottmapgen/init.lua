@@ -581,11 +581,13 @@ minetest.register_on_generated(function(minp, maxp, seed)
 											if back then
 												data[vb] = c_dirttostone_2_r
 											end
-												
-											if data[vd] == c_dirttostone_2_lr or data[vd] == c_dirttostone_2_r or data[vd] == c_dirttostone_2_l then
-												data[vi] = c_dirt
-											else
-												data[vi] = c_dirttostone_1
+													
+											if data[vi] ~= c_dirt then
+												if data[vd] == c_dirttostone_2_lr or data[vd] == c_dirttostone_2_r or data[vd] == c_dirttostone_2_l then
+													data[vi] = c_dirt
+												else
+													data[vi] = c_dirttostone_1
+												end
 											end
 										else
 											local vp = area:index(x, y+1, z)

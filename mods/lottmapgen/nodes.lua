@@ -30,6 +30,7 @@ minetest.register_node("lottmapgen:angsnowblock", {
 
 minetest.register_node("lottmapgen:dirt_to_stone_1", {
 	description = "",
+	paramtype2 = "facedir",
 	tiles = {
 		{name="default_dirt_8.png", align_style="world", scale=8},
 		{name="default_granite_8.png", align_style="world", scale=8},
@@ -46,6 +47,7 @@ minetest.register_node("lottmapgen:dirt_to_stone_1", {
 })
 minetest.register_node("lottmapgen:dirt_to_stone_1_r", {
 	description = "",
+	paramtype2 = "facedir",
 	tiles = {
 		{name="default_dirt_8.png", align_style="world", scale=8},
 		{name="default_granite_8.png", align_style="world", scale=8},
@@ -62,6 +64,7 @@ minetest.register_node("lottmapgen:dirt_to_stone_1_r", {
 })
 minetest.register_node("lottmapgen:dirt_to_stone_1_l", {
 	description = "",
+	paramtype2 = "facedir",
 	tiles = {
 		{name="default_dirt_8.png", align_style="world", scale=8},
 		{name="default_granite_8.png", align_style="world", scale=8},
@@ -79,6 +82,7 @@ minetest.register_node("lottmapgen:dirt_to_stone_1_l", {
 
 minetest.register_node("lottmapgen:dirt_to_stone_2", {
 	description = "",
+	paramtype2 = "facedir",
 	tiles = {
 		{name="default_dirt_8.png", align_style="world", scale=8},
 		{name="default_granite_8.png", align_style="world", scale=8},
@@ -95,6 +99,7 @@ minetest.register_node("lottmapgen:dirt_to_stone_2", {
 })
 minetest.register_node("lottmapgen:dirt_to_stone_2_r", {
 	description = "",
+	paramtype2 = "facedir",
 	tiles = {
 		{name="default_dirt_8.png", align_style="world", scale=8},
 		{name="default_granite_8.png", align_style="world", scale=8},
@@ -111,6 +116,7 @@ minetest.register_node("lottmapgen:dirt_to_stone_2_r", {
 })
 minetest.register_node("lottmapgen:dirt_to_stone_2_l", {
 	description = "",
+	paramtype2 = "facedir",
 	tiles = {
 		{name="default_dirt_8.png", align_style="world", scale=8},
 		{name="default_granite_8.png", align_style="world", scale=8},
@@ -127,6 +133,7 @@ minetest.register_node("lottmapgen:dirt_to_stone_2_l", {
 })
 minetest.register_node("lottmapgen:dirt_to_stone_2_lr", {
 	description = "",
+	paramtype2 = "facedir",
 	tiles = {
 		{name="default_dirt_8.png", align_style="world", scale=8},
 		{name="default_granite_8.png", align_style="world", scale=8},
